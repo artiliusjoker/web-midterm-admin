@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <% include partials/head %>
+</head>
+
+<body id="page-top">
+    <!-- Navbar Horizontal -->
+    <% include partials/nav-horizontal %>
+
+    <div id="wrapper">
+        <!-- Sidebar -->
+        <% include partials/nav-vertical %>
+        <div id="content-wrapper">
+            <div class="container-fluid">
+                <!-- Breadcrumbs-->
+                <% include partials/bread-crumbs %>
+                <!-- Custom body of pages -->
+                <%- body %>
+            </div>
+            <!-- Sticky Footer -->
+            <% include partials/footer %>
+        </div>
+
+    </div>
+    <!-- Logout -->
+    <% include partials/logout-modal %>
+    <!-- Default scripts -->
+    <% include partials/scripts %>
+    <!-- Custom scripts of pages -->
+    <%- script %>
+</body>
+
+</html>
