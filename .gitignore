@@ -1,7 +1,7 @@
 # ----------------------------
 # Generated Files & Folders
 # ----------------------------
-
+.env
 # [1] : Windows thumbnail cache files.
 # [2] : Folder config file.
 # [3] : Recycle Bin used on file shares.
@@ -23,7 +23,6 @@ logs
 npm-debug.log*
 node_modules
 yarn.lock
-package-lock.json
 
 # ----------------------------
 # Project Folders
