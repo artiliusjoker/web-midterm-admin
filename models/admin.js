@@ -6,8 +6,12 @@ const saltRound = 10;
 
 const adminSchema = new Schema({
 	email: String,
-	name: String,
-	password: String
+	username: String,
+	password: String,
+	fullname: String,
+	phone: String,
+	birthday: Date,
+	avatar: String
 });
 
 adminSchema.methods.setPassword = password => {
