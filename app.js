@@ -6,18 +6,33 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const mongoose = require('mongoose');
 const session = require('express-session');
+const passport = require('passport');
 require('dotenv').config();
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/admins');
 
 var app = express();
+
 // mongoDB connection
 mongoose.set('useFindAndModify', false);
 mongoose.connect(process.env.DATABASE, { useNewUrlParser: true, useUnifiedTopology: true }, () => {
   console.log('connected to database');
 });
 
+// Express session
+app.use(session({ 
+  secret: process.env.SECRET, 
+  cookie: { maxAge: 60000 }, 
+  resave: false, 
+  saveUninitialized: false 
+}));
+
+require('./config/passport');
+
+// Passport initialize
+app.use(passport.initialize());
+app.use(passport.session());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

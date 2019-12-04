@@ -2,7 +2,8 @@ var express = require('express');
 var router = express.Router();
 
 /* GET users listing. */
-router.get('/admin', function (req, res, next) {
+
+router.get('/dashboard', function (req, res, next) {
   res.render('index', { title: 'Dashboard', name: 'Overview' });
 });
 
@@ -28,6 +29,11 @@ router.get('/soluong-sanpham', function (req, res, next) {
 
 router.get('/quanly-donhang', function (req, res, next) {
   res.render('pages/quanly_donhang', { title: 'Don hang', name: 'Quan ly don hang'});
+});
+
+router.get('/logout', (req, res) => {
+  req.logout();
+  res.redirect('/');
 });
 
 module.exports = router;

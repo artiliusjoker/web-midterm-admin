@@ -6,9 +6,7 @@ indexController.login = (req, res) => {
 };
 
 indexController.postLogin = (req, res) => {
-	password.authenticate('local')(req, res, function(){
-		res.redirect('/');
-	});
+	res.redirect('/admin/dashboard');
 };
 
 indexController.reset = (req, res) => {
