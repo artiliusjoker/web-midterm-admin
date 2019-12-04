@@ -28,7 +28,7 @@ indexController.postRegister = (req, res) => {
 };
 
 indexController.notFound = (req, res) => {
-	res.render('pages/404', { title: '404 Not found', name: '404'});
+	res.render('pages/404', { title: '404 Not found', name: '404', layout: 'layout_a'});
 };
 
 module.exports = indexController;

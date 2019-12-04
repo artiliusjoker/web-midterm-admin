@@ -13,6 +13,6 @@ router.get('/register', indexController.register);
 router.post('/register', indexController.postRegister);
 
 // Not found page
-router.get('/*', indexController.notFound);
+//router.get('/*', indexController.notFound);
 
 module.exports = router;
