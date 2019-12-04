@@ -1,4 +1,3 @@
-const password = require('passport');
 var indexController = {};
 
 indexController.login = (req, res) => {

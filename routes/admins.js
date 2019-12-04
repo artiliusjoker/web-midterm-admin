@@ -1,39 +1,22 @@
 var express = require('express');
 var router = express.Router();
-
+const controller = require('../controller/adminController');
 /* GET users listing. */
 
-router.get('/dashboard', function (req, res, next) {
-  res.render('index', { title: 'Dashboard', name: 'Overview' });
-});
+router.get('*', controller.checkLoggedIn);
 
-router.get('/charts', function (req, res, next) {
-  res.render('pages/charts', { title: 'Charts Statistics', name: 'Charts' });
-});
+router.get('/dashboard', controller.dashboard);
 
-router.get('/tables', function (req, res, next) {
-  res.render('pages/tables', { title: 'Tables Statistics', name: 'Tables' });
-});
+router.get('/charts', controller.charts);
 
-router.get('/update', function (req, res, next) {
-  res.render('pages/update_user', { title: 'Update Info', name: 'Update'});
-});
+router.get('/tables', controller.tables);
 
-router.get('/doanhso', function (req, res, next) {
-  res.render('pages/thongke_doanhso', { title: 'Total money', name: 'Money Statistics'});
-});
+router.get('/update', controller.update);
 
-router.get('/soluong-sanpham', function (req, res, next) {
-  res.render('pages/thongke_soluong', { title: 'Total Goods Sold', name: 'Number of Goods Statistics'});
-});
+router.get('/doanhso', controller.doanhso);
 
-router.get('/quanly-donhang', function (req, res, next) {
-  res.render('pages/quanly_donhang', { title: 'Don hang', name: 'Quan ly don hang'});
-});
+router.get('/soluong-sanpham', controller.sanpham);
 
-router.get('/logout', (req, res) => {
-  req.logout();
-  res.redirect('/');
-});
+router.get('/quanly-donhang', controller.donhang);
 
 module.exports = router;
