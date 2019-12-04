@@ -13,6 +13,8 @@ router.post('/forgot-password', indexController.postReset);
 router.get('/register', indexController.register);
 router.post('/register', indexController.postRegister);
 
+router.get('/logout', indexController.logout);
+
 // Not found page
 //router.get('/*', indexController.notFound);
 

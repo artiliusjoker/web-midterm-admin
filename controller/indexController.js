@@ -28,4 +28,9 @@ indexController.notFound = (req, res) => {
 	res.render('pages/404', { title: '404 Not found', name: '404', layout: 'layout_a'});
 };
 
+indexController.logout = (req, res) => {
+    req.logout();
+    res.redirect('/');
+}
+
 module.exports = indexController;
