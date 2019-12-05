@@ -2,10 +2,8 @@ const validate = require('../config/validate');
 var adminController = {}
 
 adminController.checkLoggedIn = function (req, res, next) {
-    if (req.path === '/' || req.path === '/forgot-password' || req.path === '/register')
-        next();
-    else
-        validate.isLoggedIn(req, res, next);
+   if(validate.isLoggedIn(req, res, next)) return next();
+    else res.redirect('/');
 };
 
 adminController.dashboard = function (req, res, next) {
@@ -35,5 +33,9 @@ adminController.donhang = function (req, res, next) {
 adminController.sanpham = function (req, res, next) {
     res.render('pages/thongke_soluong', { title: 'Total Goods Sold', name: 'Number of Goods Statistics' });
 }
+
+adminController.notFound = (req, res) => {
+	res.render('pages/404', { title: '404 Not found', name: '404', layout: 'layout_a'});
+};
 
 module.exports = adminController;

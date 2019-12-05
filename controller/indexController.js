@@ -1,11 +1,17 @@
+const validate = require('../config/validate');
 var indexController = {};
+
+indexController.checkLoggedIn = function (req, res, next) {
+	if(validate.isLoggedIn(req, res, next)) res.redirect('/admin');
+	 else return next();
+ };
 
 indexController.login = (req, res) => {
 	res.render('pages/login_register/login', { title: 'Sign In', layout: 'layout_a' });
 };
 
 indexController.postLogin = (req, res) => {
-	res.redirect('/admin/dashboard');
+	res.redirect('/admin');
 };
 
 indexController.reset = (req, res) => {
@@ -22,10 +28,6 @@ indexController.register = (req, res) => {
 
 indexController.postRegister = (req, res) => {
 	res.redirect('/register');
-};
-
-indexController.notFound = (req, res) => {
-	res.render('pages/404', { title: '404 Not found', name: '404', layout: 'layout_a'});
 };
 
 indexController.logout = (req, res) => {

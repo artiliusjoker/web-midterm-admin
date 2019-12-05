@@ -5,6 +5,8 @@ const controller = require('../controller/adminController');
 
 router.get('*', controller.checkLoggedIn);
 
+router.get('/', controller.dashboard);
+
 router.get('/dashboard', controller.dashboard);
 
 router.get('/charts', controller.charts);
@@ -18,5 +20,8 @@ router.get('/doanhso', controller.doanhso);
 router.get('/soluong-sanpham', controller.sanpham);
 
 router.get('/quanly-donhang', controller.donhang);
+
+// Not found page
+router.get('/*', controller.notFound);
 
 module.exports = router;

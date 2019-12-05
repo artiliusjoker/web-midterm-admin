@@ -2,9 +2,9 @@ const validate = {};
 
 validate.isLoggedIn = function(req, res, next){
     if(req.isAuthenticated()){
-        return next();
+        return true;
     }
-    res.redirect('/');
+    return false;
 };
 
 module.exports = validate;
