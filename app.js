@@ -7,6 +7,7 @@ var logger = require('morgan');
 const mongoose = require('mongoose');
 const session = require('express-session');
 const passport = require('passport');
+const flash = require('connect-flash');
 require('dotenv').config();
 
 var indexRouter = require('./routes/index');
@@ -47,6 +48,7 @@ app.set('view engine', 'ejs');
 app.set("layout extractScripts", true)
 app.set("layout extractStyles", true)
 
+app.use(flash());
 app.use(expressLayouts);
 app.use(logger('dev'));
 app.use(express.json());

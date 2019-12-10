@@ -22,7 +22,8 @@ indexController.postLogin = (req, res, next) => {
         if (err) {
             return next(err);
         }
-        if (!user) {
+        if (!user || err) {
+			req.flash("success", "Fail, login again !");
             return res.redirect('/');
         }
         req.logIn(user, function (err) {
