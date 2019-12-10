@@ -1,6 +1,6 @@
 const validate = {};
 
-validate.isLoggedIn = function(req, res, next){
+validate.isLoggedIn = function(req){
     if(req.isAuthenticated()){
         return true;
     }

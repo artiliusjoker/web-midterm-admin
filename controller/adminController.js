@@ -2,7 +2,7 @@ const validate = require('../config/validate');
 var adminController = {}
 
 adminController.checkLoggedIn = function (req, res, next) {
-   if(validate.isLoggedIn(req, res, next)) return next();
+   if(validate.isLoggedIn(req)) return next();
     else res.redirect('/');
 };
 
