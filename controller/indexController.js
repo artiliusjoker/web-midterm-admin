@@ -1,13 +1,27 @@
 const validate = require('../config/validate');
 const adminService = require('../models/adminService');
+const passport = require('passport');
 var indexController = {};
 
 indexController.login = (req, res) => {
 	res.render('pages/login_register/login', { title: 'Sign In', layout: 'layout_a' });
 };
 
-indexController.postLogin = (req, res) => {
-	res.redirect('/admin');
+indexController.postLogin = (req, res, next) => {
+	passport.authenticate('local', function (err, user, message) {
+        if (err) {
+            return next(err);
+        }
+        if (!user) {
+            return res.redirect('/');
+        }
+        req.logIn(user, function (err) {
+            if (err) {
+                return next(err);
+            }
+            return res.redirect('/admin');
+        });
+    })(req, res, next);
 };
 
 indexController.reset = (req, res) => {
