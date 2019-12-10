@@ -34,6 +34,13 @@ require('./config/passport');
 app.use(passport.initialize());
 app.use(passport.session());
 
+// User
+app.use((req, res, next) => {
+  if (req.user)
+      res.locals.user = req.user;
+  next();
+});
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
