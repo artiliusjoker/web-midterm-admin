@@ -13,7 +13,9 @@ require('dotenv').config();
 const passportConfig = require('./config/passport');
 
 const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/admins');
+const adminRouter = require('./routes/admin');
+const userRouter = require('./routes/user');
+const productRouter = require('./routes/product');
 
 var app = express();
 
@@ -62,7 +64,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/admin', usersRouter);
+app.use('/admin', adminRouter);
+app.use('/user', userRouter);
+app.use('/product', productRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
