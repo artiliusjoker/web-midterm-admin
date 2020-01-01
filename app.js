@@ -10,8 +10,10 @@ const passport = require('passport');
 const flash = require('connect-flash');
 require('dotenv').config();
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/admins');
+const passportConfig = require('./config/passport');
+
+const indexRouter = require('./routes/index');
+const usersRouter = require('./routes/admins');
 
 var app = express();
 
@@ -29,11 +31,10 @@ app.use(session({
   saveUninitialized: false 
 }));
 
-require('./config/passport');
-
 // Passport initialize
 app.use(passport.initialize());
 app.use(passport.session());
+passportConfig(passport);
 
 // User
 app.use((req, res, next) => {
