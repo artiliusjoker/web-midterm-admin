@@ -1,8 +1,10 @@
-const validate = require('../config/validate');
+const userService = require('../models/userService');
 var userController = {}
 
-userController.listUser = function (req, res, next) {
-    res.render('pages/tables', { title: 'List User', name: 'List User' });
+userController.listUser = async function (req, res, next) {
+    const users = await userService.queryAllUsers(req, res);
+    //console.log(users);
+    res.render('pages/tables', { title: 'List User', name: 'List User', users : users });
 }
 
 userController.detailUser = async (req, res) => {
