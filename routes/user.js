@@ -7,10 +7,10 @@ router.get('*', check);
 
 router.get('/', controller.listUser);
 
-router.get('/list', controller.checkLoggedIn);
+router.get('/list', controller.listUser);
 
-router.get('/:id', controller.checkLoggedIn);
+router.get('/:id', check);
 
-router.post('/:id', controller.checkLoggedIn);
+router.post('/:id', check);
 
 module.exports = router;
