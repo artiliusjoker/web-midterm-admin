@@ -36,25 +36,27 @@ app.use(passport.initialize());
 app.use(passport.session());
 passportConfig(passport);
 
-// User
-app.use((req, res, next) => {
-  if (req.user)
-      res.locals.user = req.user;
-  next();
-});
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.set("layout extractScripts", true)
 app.set("layout extractStyles", true)
 
-app.use(flash());
 app.use(expressLayouts);
+app.use(cookieParser());
+app.use(flash());
+
+// Locals
+app.use((req, res, next) => {
+  res.locals.user = req.user;
+  res.locals.success = req.flash('success');
+  res.locals.error = req.flash('error');
+  next();
+});
+
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);

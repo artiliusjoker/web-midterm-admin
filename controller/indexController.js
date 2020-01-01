@@ -23,7 +23,7 @@ indexController.postLogin = (req, res, next) => {
             return next(err);
         }
         if (!user || err) {
-			req.flash("success", "Fail, login again !");
+			req.flash("error", "Sai thông tin, xin hãy thử lại !");
             return res.redirect('/');
         }
         req.logIn(user, function (err) {
@@ -69,8 +69,14 @@ indexController.postRegister = async (req, res) => {
 		return;
 	}
 	const check = await adminService.createAdmin(req.body);
-	if(check.result) res.redirect('/');
-	else res.redirect('/register');
+	if(check.result){
+		req.flash('success', check.message);
+		res.redirect('/');
+	}
+	else {
+		req.flash('error', check.message);
+		res.redirect('/register');
+	};
 };
 
 indexController.logout = (req, res) => {
