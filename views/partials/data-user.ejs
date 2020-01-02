@@ -22,7 +22,7 @@
                         <%- listUser(user) %>
                         <td>
                             <button type="button" class="btn btn-primary">Xem chi tiết</button>
-                            <button type="button" class="btn btn-success">Chỉnh sửa</button>
+                            <a href="/user/<%= user.id %>"><button type="button" class="btn btn-success">Chỉnh sửa</button></a>
                             <button type="button" class="btn btn-danger">Xoá</button>
                         </td>
                     </tr>

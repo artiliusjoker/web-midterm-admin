@@ -11,6 +11,7 @@ exports.queryAllUsers = async (req, res) => {
         phoneNum: user.phone,
         moneySpent: '200,000',
         createAt: new Date(user.createdAt),
+        id: user._id
     }))
     users.forEach(user => {
         const temp = user.createAt;
