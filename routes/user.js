@@ -9,8 +9,8 @@ router.get('/', controller.listUser);
 
 router.get('/list', controller.listUser);
 
-router.get('/:id', check);
+router.get('/:id', controller.getDetails);
 
-router.post('/:id', check);
+router.post('/:id', controller.updateDetails);
 
 module.exports = router;

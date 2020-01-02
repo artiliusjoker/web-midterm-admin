@@ -1,7 +1,7 @@
 const user = require('./user');
 
 exports.queryAllUsers = async (req, res) => {
-    const userQuery = await user.find({});
+    const userQuery = await user.find({}, '-order');
 
     const users = userQuery.map(user => ({
         fullname: user.name,
@@ -18,4 +18,18 @@ exports.queryAllUsers = async (req, res) => {
         delete user.createAt;
     })
     return users;
+}
+
+exports.querryDetail = async (req, res) => {
+    const userDetail = await user.findById(req.params.id, '-order -active -createAt -updateAt');
+    const result = {
+        fullname: userDetail.name,
+        username: userDetail.username,
+        email: userDetail.email,
+        phone: userDetail.phone,
+        status: userDetail.status,
+        dob: userDetail.dob,
+        avatar: 'null',
+    }
+    return result;
 }
