@@ -11,6 +11,10 @@ exports.queryAllUsers = async (req, res) => {
         moneySpent: '200,000',
         createAt: new Date(user.createdAt),
     }))
-    users[0].dayCreated = `${users[0].createAt.getDate()}/${users[0].createAt.getMonth()+1}/${users[0].createAt.getFullYear()}`;
+    users.forEach(user => {
+        const temp = user.createAt;
+        user.dayCreated = `${temp.getDate()}/${temp.getMonth() + 1}/${temp.getFullYear()}`;
+        delete user.createAt;
+    })
     return users;
 }

@@ -28,7 +28,7 @@ mongoose.connect(process.env.DATABASE, { useNewUrlParser: true, useUnifiedTopolo
 // Express session
 app.use(session({ 
   secret: process.env.SECRET, 
-  cookie: { maxAge: 60000 }, 
+  cookie: { maxAge: 600000 }, 
   resave: false, 
   saveUninitialized: false 
 }));

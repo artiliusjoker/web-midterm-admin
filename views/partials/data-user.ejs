@@ -21,41 +21,10 @@
                     
                     <% for( user of users ) {%>
                     <tr>
-                        <% if(user.fullname && user.fullname.length > 0){ %>
-                            <td> <%= user.fullname %></td>
-                        <% } %>
-
-                        <% if(user.email && user.email.length > 0){ %>
-                            <td><%= user.email %></td>
-                        <% } %>
-
-                        <% if(user.username && user.username.length > 0){ %>
-                            <td><%= user.username %></td>
-                        <% } %>
-
-                        <% if(user.phoneNum && user.phoneNum.length > 0){ %>
-                            <td><%= user.phoneNum %></td>
-                        <% } %>
-
-                        <% if(user.dayCreated && user.dayCreated.length > 0){ %>
-                            <td><%= user.dayCreated %></td>
-                        <% } %>
-
-                        <% if(user.moneySpent && user.moneySpent.length > 0){ %>
-                            <td>$<%= user.moneySpent %></td>
-                        <% } %>
+                        <%- listUser(user) %>
                     </tr>
                     <% } %>
                     
-                    <tr>
-                        <td>Tiger Trần</td>
-                        <td>Quôc sư Hoa kỳ</td>
-                        <td>Edinburgh</td>
-                        <td>61</td>
-                        <td>2011/04/25</td>
-                        <td>$320,800</td>
-                    </tr>
-
                 </tbody>
             </table>
         </div>
