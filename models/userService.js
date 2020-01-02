@@ -6,6 +6,7 @@ exports.queryAllUsers = async (req, res) => {
     const users = userQuery.map(user => ({
         fullname: user.name,
         username: user.username,
+        status: user.status,
         email: user.email,
         phoneNum: user.phone,
         moneySpent: '200,000',

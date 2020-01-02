@@ -10,10 +10,8 @@
                     <tr>
                         <th>Tên</th>
                         <th>Tên đăng nhập</th>
-                        <th>Email</th>
-                        <th>Số điện thoại</th>
-                        <th>Tiền đã mua</th>
-                        <th>Ngày tạo</th>
+                        <th>Trạng thái</th>
+                        <th>Thao tác</th>
                     </tr>
                 </thead>
 
@@ -22,6 +20,11 @@
                     <% for( user of users ) {%>
                     <tr>
                         <%- listUser(user) %>
+                        <td>
+                            <button type="button" class="btn btn-primary">Xem chi tiết</button>
+                            <button type="button" class="btn btn-success">Chỉnh sửa</button>
+                            <button type="button" class="btn btn-danger">Xoá</button>
+                        </td>
                     </tr>
                     <% } %>
                     
