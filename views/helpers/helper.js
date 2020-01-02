@@ -5,6 +5,7 @@ module.exports = {
             if (user[key] && user[key].length > 0) {
                 result += `<td>${user[key]}</td>`; 
             }
+            else result += '<td>null</td>';
         })
         return result;
     }
