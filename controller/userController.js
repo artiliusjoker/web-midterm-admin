@@ -16,4 +16,8 @@ userController.updateDetails = async (req, res, next) => {
     res.render('pages/user/detail', { title: 'User detail', name: 'Detail' });
 }
 
+userController.test = (req, res, next) => {
+    res.render('pages/user/profile', { title: 'User profile', name: 'Profile' });
+}
+
 module.exports = userController;

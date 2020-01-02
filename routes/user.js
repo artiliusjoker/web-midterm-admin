@@ -5,7 +5,7 @@ const check = require('../controller/adminController').checkLoggedIn;
 
 router.get('*', check);
 
-router.get('/', controller.listUser);
+router.get('/', controller.test);
 
 router.get('/list', controller.listUser);
 
