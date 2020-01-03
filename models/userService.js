@@ -56,31 +56,9 @@ exports.querryDetail = async (req, res) => {
 exports.updateUser = async (userId, body) => {
     let status = true,
         message = 'Cập nhật thành công',
-        type = 'success',
-        flag = false;
-    
-    if(body.password.length != 0 && body.password.length < 6){
-        status = false;
-        message = 'Độ dài mật khẩu mới phải lớn hơn 6';
-        flag = true;
-        type = 'error'
-    }
-
-    else if (await service.findByUname(body.username))
-    {
-        status = false;
-        message = 'Tên đăng nhập này đã có, không thể đổi !';
-        flag = true;
-        type = 'error';
-    }
-    if (flag) return ({
-        status,
-        message,
-        type
-    })
+        type = 'success';
 
     const updateInfo = {
-        username : body.username,
         name: body.fullname,
         address: body.address,
         phone: body.phone,
@@ -88,17 +66,33 @@ exports.updateUser = async (userId, body) => {
     }
 
     const user = await User.findByIdAndUpdate(userId, updateInfo);
-
-    if(body.password.length != 0){
-        const salt = await bcrypt.genSalt(10);
-        const hashedPass = await bcrypt.hash(admin.password, salt);
-        user.password = hashedPass;
-        flag = true;
+   
+    if (body.password.length != 0 && body.password.length < 6) {
+        status = false;
+        message = 'Độ dài mật khẩu mới phải lớn hơn 6, thông tin khác vẫn được cập nhật !';
+        type = 'error'
     }
-    
-    if(flag == true) await user.save();
+    else if(body.password.length != 0){
+        const salt = await bcrypt.genSalt(10);
+        const hashedPass = await bcrypt.hash(body.password, salt);
+        user.password = hashedPass;
+        message = 'Cập nhật thông tin và mật khẩu thành công';
+    }
+    if (user.username != body.username)
+    {
+        if(await service.findByUname(body.username))
+        {
+            message = 'Tên đăng nhập đã tồn tại, xin chọn tên khác, các thông tin mới vẫn được lưu lại !';
+            status = false;
+            type = 'error';
+        }
+        else{
+            user.username = body.username;
+            await user.save();
+        }
+    }
 
-    return{
+    return {
         status,
         message,
         type

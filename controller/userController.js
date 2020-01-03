@@ -21,7 +21,7 @@ userController.getDetails = async (req, res, next) => {
 userController.updateDetails = async (req, res, next) => {
     const check = await userService.updateUser(req.params.id, req.body);
     req.flash(check.type, check.message);
-    return res.redirect(`/user/${req.params.id}`);
+    res.redirect(`/user/${req.params.id}`);
 }
 
 userController.test = (req, res, next) => {
