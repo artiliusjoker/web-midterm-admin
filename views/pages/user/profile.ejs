@@ -31,8 +31,8 @@
                 <div class="tab-pane active" id="home">
 
                     <form class="form" action="#" method="POST" id="registrationForm">
+                        
                         <div class="form-group">
-
                             <div class="col-xs-6">
                                 <label for="username">
                                     <h4>Tên đăng nhập</h4>
@@ -78,7 +78,7 @@
                                 <label for="email">
                                     <h4>Địa chỉ</h4>
                                 </label>
-                                <input name="address" value="chưa có" type="text" class="form-control" id="location" title="Địa chỉ khách">
+                                <input name="address" value="<%= detail.address %>" type="text" class="form-control" id="location" title="Địa chỉ khách">
                             </div>
                         </div>
                         <div class="form-group">
@@ -101,6 +101,7 @@
                                     id="password_confirm" title="Xác nhận mật khẩu">
                             </div>
                         </div>
+                        <% include ../../partials/flash %>
                         <div class="form-group">
                             <div class="col-xs-12">
                                 <br>

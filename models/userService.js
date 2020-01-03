@@ -42,6 +42,7 @@ exports.querryDetail = async (req, res) => {
             username: userDetail.username,
             email: userDetail.email,
             phone: userDetail.phone,
+            address: userDetail.address,
             status: userDetail.status,
             dob: userDetail.dob,
             avatar: 'null',
