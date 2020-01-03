@@ -21,9 +21,9 @@
                     <tr>
                         <%- listUser(user) %>
                         <td>
-                            <button type="button" class="btn btn-primary">Xem chi tiết</button>
-                            <a href="/user/<%= user.id %>"><button type="button" class="btn btn-success">Chỉnh sửa</button></a>
-                            <button type="button" class="btn btn-danger">Xoá</button>
+                            <a href="#"><i class="fas fa-address-card text-info"></i></i></a>
+                            <a href="/user/<%= user.id %>"><i class="fas fa-tools text-warning"></i></a>
+                            <i class="fas fa-trash-alt text-danger"></i>
                         </td>
                     </tr>
                     <% } %>
