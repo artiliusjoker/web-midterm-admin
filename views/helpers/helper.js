@@ -22,5 +22,25 @@ module.exports = {
             else result += '<td>null</td>';
         }
         return result;
+    },
+
+    selectedOption: userDetailStatus => {
+        let options = {
+            active: 'class="text-success" value="active">Hoạt động (active)',
+            banned: 'class="text-danger" value="banned">Khoá (banned)',
+            inactive: 'class="text-warning" value="inactive">Buộc xác nhận lại (inactive)',
+            deleted: 'class="text-muted" value="null">Đã bị xoá (deleted)',
+        }
+        let result = '';
+        for (let element in options)
+        {
+            if(userDetailStatus === element)
+            {
+                result += `<option selected ${options[element]} - current</option>`;
+            }
+            else result += `<option ${options[element]}</option>`;
+        }
+        return result;
     }
+
 }

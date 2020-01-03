@@ -15,7 +15,7 @@ userController.getDetails = async (req, res, next) => {
         res.render('pages/user/profile', { title: 'User profile', name: 'Profile', detail: 'null' });
     }
 
-    res.render('pages/user/profile', { title: 'User profile', name: 'Profile', detail : user });
+    res.render('pages/user/profile', { title: 'User profile', name: 'Profile', detail : user, helper: ejsHelper.selectedOption });
 }
 
 userController.updateDetails = async (req, res, next) => {
@@ -26,6 +26,10 @@ userController.updateDetails = async (req, res, next) => {
 
 userController.test = (req, res, next) => {
     res.render('pages/user/profile', { title: 'User profile', name: 'Profile' });
+}
+
+userController.postStatus = (req, res, next) => {
+    res.redirect('/admin');
 }
 
 module.exports = userController;
