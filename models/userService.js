@@ -100,3 +100,41 @@ exports.updateUser = async (userId, body) => {
         type
     }
 }
+
+exports.addUser = async (userInfo) => {
+    let result = true;
+    let message = 'Tạo thành công !';
+    // Validate dependencies
+    if (userInfo.password.length < 6) {
+        result = false;
+        message = 'Mật khẩu phải dài hơn hoặc bằng 6 kí tự !';
+    }
+    else if (await service.findByUname(userInfo.username)) {
+        result = false;
+        message = 'Tên đăng nhập đã có, hãy thử lại !';
+    }
+
+    if(!result) return {
+        result,
+        message
+    }
+
+    const newUser = new User({
+        username: userInfo.username,
+        name: userInfo.fullname,
+        dob: userInfo.dob,
+        phone: userInfo.phone,
+        email: userInfo.email,
+        address: userInfo.address,
+        status: userInfo.status
+    });
+
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(userInfo.password, salt);
+    newUser.password = hashedPassword;
+    await newUser.save();
+    return ({
+        result,
+        message
+    })
+}

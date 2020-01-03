@@ -12,7 +12,7 @@ const UserSchema = new mongoose.Schema({
     status: {
         type: String,
         enum: ['active', 'banned', 'deleted', 'inactive'],
-        default: 'active'
+        default: 'inactive'
     },
     order: [{
         status: String,

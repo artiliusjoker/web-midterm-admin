@@ -29,8 +29,9 @@ userController.getAddUser = (req, res, next) => {
 }
 
 userController.postAddUser = async (req, res, next) => {
-    const check = await userService.updateUser(req.params.id, req.body);
-    req.flash(check.type, check.message);
+    const check = await userService.addUser(req.body);
+    const messageType = check ? 'success' : 'error';
+    req.flash(messageType, check.message);
     res.redirect('/user/add');
 }
 
