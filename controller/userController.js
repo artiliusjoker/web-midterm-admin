@@ -24,6 +24,16 @@ userController.updateDetails = async (req, res, next) => {
     res.redirect(`/user/${req.params.id}`);
 }
 
+userController.getAddUser = (req, res, next) => {
+    res.render('pages/user/add', { title: 'Add user', name: 'Add user'});
+}
+
+userController.postAddUser = async (req, res, next) => {
+    const check = await userService.updateUser(req.params.id, req.body);
+    req.flash(check.type, check.message);
+    res.redirect('/user/add');
+}
+
 userController.test = (req, res, next) => {
     res.render('pages/user/profile', { title: 'User profile', name: 'Profile' });
 }
