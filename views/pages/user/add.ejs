@@ -1,8 +1,7 @@
-<% if (detail) { %>
 <div class="container bootstrap snippet">
     <div class="row">
         <div class="col-sm-10">
-            <h2>Khách hàng : <%= detail.username %></h2>
+            <h1>User name</h1>
         </div>
     </div>
     <div class="row">
@@ -38,7 +37,7 @@
                                     <h4>Tên đăng nhập</h4>
                                 </label>
                                 <input type="text" class="form-control" name="username" id="user_name"
-                                    title="Tên đăng nhập" value="<%= detail.username %>">
+                                    title="Tên đăng nhập">
                             </div>
                         </div>
 
@@ -49,7 +48,7 @@
                                     <h4>Họ tên</h4>
                                 </label>
                                 <input type="text" class="form-control" name="fullname" id="full_name"
-                                    title="Tên khách hàng" value="<%= detail.fullname %>">
+                                    title="Tên khách hàng">
                             </div>
                         </div>
 
@@ -59,8 +58,8 @@
                                 <label for="phone">
                                     <h4>Điện thoại</h4>
                                 </label>
-                                <input type="text" class="form-control" name="phone" id="phone" title="Số điện thoại"
-                                    value=" <%= detail.phone %> ">
+                                <input type="text" class="form-control" name="phone" id="phone"
+                                    title="Số điện thoại">
                             </div>
                         </div>
 
@@ -69,7 +68,8 @@
                                 <label for="email">
                                     <h4>Địa chỉ email</h4>
                                 </label>
-                                <input value="<%= detail.email %>" type="email" class="form-control" name="email" id="email" title="Địa chỉ email">
+                                <input type="email" class="form-control" name="email" id="email"
+                                    title="Địa chỉ email">
                             </div>
                         </div>
 
@@ -78,7 +78,8 @@
                                 <label for="email">
                                     <h4>Địa chỉ</h4>
                                 </label>
-                                <input value="chưa có" type="text" class="form-control" id="location" title="Địa chỉ khách">
+                                <input type="text" class="form-control" id="location"
+                                    title="Địa chỉ khách">
                             </div>
                         </div>
                         <div class="form-group">
@@ -88,7 +89,7 @@
                                     <h4>Mật khẩu mới</h4>
                                 </label>
                                 <input type="password" class="form-control" name="password" id="password"
-                                    title="Mật khẩu">
+                                   title="Mật khẩu">
                             </div>
                         </div>
                         <div class="form-group">
@@ -97,8 +98,8 @@
                                 <label for="password_confirm">
                                     <h4>Xác nhận mật khẩu</h4>
                                 </label>
-                                <input type="password" class="form-control" name="password_confirm"
-                                    id="password_confirm" title="Xác nhận mật khẩu">
+                                <input type="password" class="form-control" name="password_confirm" id="password_confirm"
+                                    title="Xác nhận mật khẩu">
                             </div>
                         </div>
                         <div class="form-group">
@@ -118,17 +119,13 @@
 
                     <h2></h2>
                     <form class="form" action="##" method="post" id="registrationForm">
-                        <div class="form-group row">
-                            <label class="col-md-3">
-                                <h4>Sửa trạng thái</h4>
-                            </label>
-                            <div class="col-md-9">
-                                <select id="select-status" class="custom-select form-control">
-                                    <option value="active" <%if (detail.status == 'active' ) {%>  <%- 'selected' %>  <%}%> >Hoạt động (active)</option>
-                                    <option value="banned" <%if (detail.status == 'banned' ) {%>  <%- 'selected' %>  <%}%> >Khoá (banned)</option>
-                                    <option value="inactive"<%if (detail.status == 'inactive' ) {%>  <%- 'selected' %>  <%}%> >Buộc xác nhận lại (inactive)</option>
-                                    <option value="" <%if (detail.status == 'deleted' ) {%>  <%- 'selected' %>  <%}%> >Đã bị xoá (deleted)</option>
-                                </select>
+                        <div class="form-group">
+                            <div class="col-xs-6">
+                                <label for="first_name">
+                                    <h4>First name</h4>
+                                </label>
+                                <input type="text" class="form-control" name="first_name" id="first_name"
+                                    placeholder="first name" title="enter your first name if any.">
                             </div>
                         </div>
 
@@ -140,8 +137,6 @@
                                 <button class="btn btn-lg btn-info" type="reset"><i
                                         class="glyphicon glyphicon-repeat"></i>
                                     Làm mới</button>
-                                <button class="btn btn-lg btn-danger" type="submit">
-                                    Xoá</button>
                             </div>
                         </div>
                     </form>
@@ -157,6 +152,3 @@
     <!--/col-9-->
 </div>
 <!--/row-->
-<% } else{ %>  
-    <% include ../404 %>
-<% } %>
