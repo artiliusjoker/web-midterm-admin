@@ -8,8 +8,14 @@ userController.listUser = async function (req, res, next) {
 }
 
 userController.getDetails = async (req, res, next) => {
-    const user = await userService.querryDetail(req, res);
-    res.render('pages/user/profile', { title: 'User profile', name: 'Profile', detail : user  });
+    let user;
+    try {
+        user = await userService.querryDetail(req, res);
+    } catch (error) {
+        res.render('pages/user/profile', { title: 'User profile', name: 'Profile', detail: 'null' });
+    }
+
+    res.render('pages/user/profile', { title: 'User profile', name: 'Profile', detail : user });
 }
 
 userController.updateDetails = async (req, res, next) => {

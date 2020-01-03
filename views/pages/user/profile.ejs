@@ -1,4 +1,4 @@
-<% if (detail) { %>
+<% if (detail != 'null') { %>
 <div class="container bootstrap snippet">
     <div class="row">
         <div class="col-sm-10">
@@ -124,10 +124,10 @@
                             </label>
                             <div class="col-md-9">
                                 <select id="select-status" class="custom-select form-control">
-                                    <option value="active" <%if (detail.status == 'active' ) {%>  <%- 'selected' %>  <%}%> >Hoạt động (active)</option>
-                                    <option value="banned" <%if (detail.status == 'banned' ) {%>  <%- 'selected' %>  <%}%> >Khoá (banned)</option>
-                                    <option value="inactive"<%if (detail.status == 'inactive' ) {%>  <%- 'selected' %>  <%}%> >Buộc xác nhận lại (inactive)</option>
-                                    <option value="" <%if (detail.status == 'deleted' ) {%>  <%- 'selected' %>  <%}%> >Đã bị xoá (deleted)</option>
+                                    <option class="text-success" value="active" <%if (detail.status == 'active' ) {%>  <%- 'selected' %>  <%}%> >Hoạt động (active)</option>
+                                    <option class="text-danger" value="banned" <%if (detail.status == 'banned' ) {%>  <%- 'selected' %>  <%}%> >Khoá (banned)</option>
+                                    <option class="text-warning" value="inactive"<%if (detail.status == 'inactive' ) {%>  <%- 'selected' %>  <%}%> >Buộc xác nhận lại (inactive)</option>
+                                    <option class="text-muted" value="" <%if (detail.status == 'deleted' ) {%>  <%- 'selected' %>  <%}%> >Đã bị xoá (deleted)</option>
                                 </select>
                             </div>
                         </div>

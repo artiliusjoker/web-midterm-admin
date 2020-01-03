@@ -22,15 +22,20 @@ exports.queryAllUsers = async (req, res) => {
 }
 
 exports.querryDetail = async (req, res) => {
-    const userDetail = await user.findById(req.params.id, '-order -active -createAt -updateAt');
-    const result = {
-        fullname: userDetail.name,
-        username: userDetail.username,
-        email: userDetail.email,
-        phone: userDetail.phone,
-        status: userDetail.status,
-        dob: userDetail.dob,
-        avatar: 'null',
+    let result;
+    try {
+        const userDetail = await user.findById(req.params.id, '-order -active -createAt -updateAt');
+        result = {
+            fullname: userDetail.name,
+            username: userDetail.username,
+            email: userDetail.email,
+            phone: userDetail.phone,
+            status: userDetail.status,
+            dob: userDetail.dob,
+            avatar: 'null',
+        }
+    } catch (error) {
+        throw (new Error('User does not exist !'));
     }
     return result;
 }
