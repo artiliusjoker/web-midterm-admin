@@ -9,8 +9,6 @@ router.get('/', controller.test);
 
 router.get('/list', controller.listUser);
 
-router.post('/:id/status', controller.postStatus);
-
 router.get('/:id', controller.getDetails);
 
 router.post('/:id', controller.updateDetails);

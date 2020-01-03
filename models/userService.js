@@ -65,6 +65,8 @@ exports.updateUser = async (userId, body) => {
         email: body.email
     }
 
+    if(body.status != 'null') updateInfo.status = body.status;
+
     const user = await User.findByIdAndUpdate(userId, updateInfo);
    
     if (body.password.length != 0 && body.password.length < 6) {
