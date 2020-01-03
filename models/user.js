@@ -8,6 +8,7 @@ const UserSchema = new mongoose.Schema({
     name: String,
     dob: Date,
     avatar: String,
+    address: String,
     status: {
         type: String,
         enum: ['active', 'banned', 'deleted', 'inactive'],
