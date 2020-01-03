@@ -37,6 +37,8 @@ exports.querryDetail = async (req, res) => {
     let result;
     try {
         const userDetail = await User.findById(req.params.id, '-order -active -createAt -updateAt');
+        const dateToString =`${userDetail.dob.getFullYear()}-${userDetail.dob.getMonth() + 1}-${userDetail.dob.getDate()}`;
+        console.log(dateToString);
         result = {
             fullname: userDetail.name,
             username: userDetail.username,
@@ -44,7 +46,7 @@ exports.querryDetail = async (req, res) => {
             phone: userDetail.phone,
             address: userDetail.address,
             status: userDetail.status,
-            dob: userDetail.dob,
+            dob: dateToString,
             avatar: 'null',
         }
     } catch (error) {
@@ -62,7 +64,8 @@ exports.updateUser = async (userId, body) => {
         name: body.fullname,
         address: body.address,
         phone: body.phone,
-        email: body.email
+        email: body.email,
+        dob: body.dob
     }
 
     if(body.status != 'null') updateInfo.status = body.status;
