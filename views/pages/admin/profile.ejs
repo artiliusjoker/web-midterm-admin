@@ -4,40 +4,13 @@
             <img class="w-100 rounded border" src="https://cdn.bootstrapsnippet.net/assets/image/dummy-avatar.jpg" />
             <div class="pt-4 mt-2">
                 <section class="mb-4 pb-1">
-                    <h3 class="h6 font-weight-light text-secondary text-uppercase">Work Experiences</h3>
+                    <h3 class="h6 font-weight-light text-secondary text-uppercase">Trạng thái : <%= user.status %></h3>
                     <div class="work-experience pt-2">
                         <div class="work mb-4">
-                            <strong class="h5 d-block text-secondary font-weight-bold mb-1">Prodesign Inc</strong>
-                            <strong class="h6 d-block text-warning mb-1">Front End Developer</strong>
-                            <p class="text-secondary">Southern Street Floral Park, NY 11001</p>
-                        </div>
-                        <div class="work mb-4">
-                            <strong class="h5 d-block text-secondary font-weight-bold mb-1">Blue Tech</strong>
-                            <strong class="h6 d-block text-warning mb-1">Senior Programmer</strong>
-                            <p class="text-secondary">George Avenue Mobile, AL 36608</p>
-                        </div>
-                    </div>
-                </section>
-                <section class="mb-5 mb-md-0">
-                    <h3 class="h6 font-weight-light text-secondary text-uppercase">Skills</h3>
-                    <div class="skills pt-1 row">
-                        <div class="col-4 mb-2">
-                            <div class="chart" data-percent="95" data-scale-color="#fff"><span>PHP</span></div>
-                        </div>
-                        <div class="col-4 mb-2">
-                            <div class="chart" data-percent="85" data-scale-color="#fff"><span>Ruby</span></div>
-                        </div>
-                        <div class="col-4 mb-2">
-                            <div class="chart" data-percent="90" data-scale-color="#fff"><span>Java</span></div>
-                        </div>
-                        <div class="col-4 mb-2">
-                            <div class="chart" data-percent="82" data-scale-color="#fff"><span>Python</span></div>
-                        </div>
-                        <div class="col-4 mb-2">
-                            <div class="chart" data-percent="70" data-scale-color="#fff"><span>C++</span></div>
-                        </div>
-                        <div class="col-4 mb-2">
-                            <div class="chart" data-percent="60" data-scale-color="#fff"><span>ASP</span></div>
+                            <strong class="h5 d-block text-secondary font-weight-bold mb-1">Tên đăng nhập :
+                                <%= user.username %></strong>
+                            <strong class="h6 d-block text-warning mb-1">Quyền hạn : <%= user.role %></strong>
+                            <p class="text-secondary"><%= user.address %></p>
                         </div>
                     </div>
                 </section>
@@ -50,25 +23,10 @@
                 </h2>
                 <address class="m-0 pt-2 pl-0 pl-md-4 font-weight-light text-secondary">
                     <i class="fa fa-map-marker"></i>
-                    Ho Chi Minh University of Science
+                    <%= user.address %>
                 </address>
             </div>
-            <p class="h5 text-primary mt-2 d-block font-weight-light">
-                Vai trò :
-            </p>
-            <p class="lead mt-4">Trang thông tin cá nhân, có thể cập nhật thông tin bản thân</p>
-            <section class="mt-5">
-                <h3 class="h6 font-weight-light text-secondary text-uppercase">Rankings</h3>
-                <div class="d-flex align-items-center">
-                    <strong class="h1 font-weight-bold m-0 mr-3">4.85</strong>
-                    <div>
-                        <input data-filled="fa fa-2x fa-star mr-1 text-warning"
-                            data-empty="fa fa-2x fa-star-o mr-1 text-light" value="5" type="hidden" class="rating"
-                            data-readonly />
-                    </div>
-                </div>
-            </section>
-            
+
             <section class="mt-4">
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                     <li class="nav-item">
@@ -123,7 +81,128 @@
                             <dd class="col-sm-9">Male</dd>
                         </dl>
                     </div>
-                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">...</div>
+                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                        <div class="tab-content mt-3">
+                            <div class="tab-pane active" id="home">
+
+                                <form class="form" action="#" method="POST" id="registrationForm">
+
+                                    <div class="form-group row">
+                                        <div class="col-md-3">
+                                            <label for="username">
+                                                <h4>Tên đăng nhập</h4>
+                                            </label>
+                                        </div>
+                                        <div class="col-md-9">
+                                            <input type="text" class="form-control" name="username" id="user_name"
+                                                title="Tên đăng nhập" value="<%= user.username %>">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+
+                                        <div class="col-md-3">
+                                            <label for="fullname">
+                                                <h4>Họ tên</h4>
+                                            </label>
+                                        </div>
+                                        <div class="col-md-9">
+                                            <input type="text" class="form-control" name="fullname" id="full_name"
+                                                title="Tên khách hàng" value="<%= user.fullname %>">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <div class="col-md-3">
+                                            <label for="dob">
+                                                <h4>Ngày sinh</h4>
+                                            </label>
+                                        </div>
+                                        <div class="col-md-9">
+                                            <input name="dob" type="date" class="form-control" id="dob"
+                                                value="<%= user.dob %>">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+
+                                        <div class="col-md-3">
+                                            <label for="phone">
+                                                <h4>Điện thoại</h4>
+                                            </label>
+                                        </div>
+                                        <div class="col-md-9">
+                                            <input type="text" class="form-control" name="phone" id="phone"
+                                                title="Số điện thoại" value="<%= user.phone %>">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <div class="col-md-3">
+                                            <label for="email">
+                                                <h4>Địa chỉ email</h4>
+                                            </label>
+                                        </div>
+                                        <div class="col-md-9">
+                                            <input value="<%= user.email %>" type="email" class="form-control"
+                                                name="email" id="email" title="Địa chỉ email">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <div class="col-md-3">
+                                            <label for="email">
+                                                <h4>Địa chỉ</h4>
+                                            </label>
+                                        </div>
+                                        <div class="col-md-9">
+                                            <input name="address" value="<%= user.address %>" type="text"
+                                                class="form-control" id="location" title="Địa chỉ khách">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+
+                                        <div class="col-md-3">
+                                            <label for="password">
+                                                <h4>Mật khẩu mới</h4>
+                                            </label>
+                                        </div>
+                                        <div class="col-md-9">
+                                            <input type="password" class="form-control" name="password" id="password"
+                                                title="Mật khẩu">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+
+                                        <div class="col-md-3">
+                                            <label for="password_confirm">
+                                                <h4>Xác nhận lại</h4>
+                                            </label>
+                                        </div>
+                                        <div class="col-md-9">
+                                            <input type="password" class="form-control" name="password_confirm"
+                                                id="password_confirm" title="Xác nhận mật khẩu">
+                                        </div>
+                                    </div>
+
+                                    <% include ../../partials/flash %>
+                                    <div class="form-group">
+                                        <div class="col-xs-12 text-center">
+                                            <br>
+                                            <button class="btn btn-lg btn-success" type="submit"><i
+                                                    class="glyphicon glyphicon-ok-sign"></i> Lưu</button>
+                                            <button class="btn btn-lg btn-info" type="reset"><i
+                                                    class="glyphicon glyphicon-repeat"></i>
+                                                Làm mới</button>
+                                        </div>
+                                    </div>
+                                </form>
+
+                            </div>
+
+                            <!--/tab-pane-->
+                        </div>
+                    </div>
                     <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
                 </div>
             </section>
