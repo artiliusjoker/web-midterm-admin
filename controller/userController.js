@@ -8,14 +8,12 @@ userController.listUser = async function (req, res, next) {
 }
 
 userController.getDetails = async (req, res, next) => {
-    let user;
-    try {
-        user = await userService.querryDetail(req, res);
-    } catch (error) {
+    const user = await userService.querryDetail(req, res);
+    if(!user)
+    {
         res.render('pages/user/profile', { title: 'User profile', name: 'Profile', detail: 'null' });
     }
-
-    res.render('pages/user/profile', { title: 'User profile', name: 'Profile', detail : user, helperStatus: ejsHelper.selectedOption });
+    else res.render('pages/user/profile', { title: 'User profile', name: 'Profile', detail : user, helperStatus: ejsHelper.selectedOption });
 }
 
 userController.updateDetails = async (req, res, next) => {

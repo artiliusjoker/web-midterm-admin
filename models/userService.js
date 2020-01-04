@@ -34,23 +34,17 @@ exports.queryAllUsers = async (req, res) => {
 }
 
 exports.querryDetail = async (req, res) => {
-    let result;
-    try {
-        const userDetail = await User.findById(req.params.id, '-order -active -createAt -updateAt');
-        const dateToString =`${userDetail.dob.getFullYear()}-${userDetail.dob.getMonth() + 1}-${userDetail.dob.getDate()}`;
-        console.log(dateToString);
-        result = {
-            fullname: userDetail.name,
-            username: userDetail.username,
-            email: userDetail.email,
-            phone: userDetail.phone,
-            address: userDetail.address,
-            status: userDetail.status,
-            dob: dateToString,
-            avatar: 'null',
-        }
-    } catch (error) {
-        throw (new Error('User does not exist !'));
+    const userDetail = await User.findById(req.params.id, '-order -active -createAt -updateAt');
+    const dateToString = userDetail.dob ? `${userDetail.dob.getFullYear()}-${userDetail.dob.getMonth() + 1}-${userDetail.dob.getDate()}` : 'null';
+    const result = {
+        fullname: userDetail.name,
+        username: userDetail.username,
+        email: userDetail.email,
+        phone: userDetail.phone,
+        address: userDetail.address,
+        status: userDetail.status,
+        dob: dateToString,
+        avatar: 'null',
     }
     return result;
 }
@@ -68,30 +62,28 @@ exports.updateUser = async (userId, body) => {
         dob: body.dob
     }
 
-    if(body.status != 'null') updateInfo.status = body.status;
+    if (body.status != 'null') updateInfo.status = body.status;
 
     const user = await User.findByIdAndUpdate(userId, updateInfo);
-   
+
     if (body.password.length != 0 && body.password.length < 6) {
         status = false;
         message = 'Độ dài mật khẩu mới phải lớn hơn 6, thông tin khác vẫn được cập nhật !';
         type = 'error'
     }
-    else if(body.password.length != 0){
+    else if (body.password.length != 0) {
         const salt = await bcrypt.genSalt(10);
         const hashedPass = await bcrypt.hash(body.password, salt);
         user.password = hashedPass;
         message = 'Cập nhật thông tin và mật khẩu thành công';
     }
-    if (user.username != body.username)
-    {
-        if(await service.findByUname(body.username))
-        {
+    if (user.username != body.username) {
+        if (await service.findByUname(body.username)) {
             message = 'Tên đăng nhập đã tồn tại, xin chọn tên khác, các thông tin mới vẫn được lưu lại !';
             status = false;
             type = 'error';
         }
-        else{
+        else {
             user.username = body.username;
             await user.save();
         }
@@ -117,7 +109,7 @@ exports.addUser = async (userInfo) => {
         message = 'Tên đăng nhập đã có, hãy thử lại !';
     }
 
-    if(!result) return {
+    if (!result) return {
         result,
         message
     }
