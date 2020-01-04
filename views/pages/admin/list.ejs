@@ -1,0 +1,45 @@
+<link rel="stylesheet" href="/css/css_pages/table.css">
+<!-- DataTables Example -->
+<div class="card mb-3" id="quan-table">
+    <div class="card-header border-0 py-2 rounded-top">
+        <div class="d-flex align-items-center py-1">
+            <h3 class="m-0 h5 font-weight-normal text-white w-50">Thống kê khách hàng</h3>
+            <div class="w-50 text-right">
+                <a href="/user/add"><button class="btn btn-sm btn-outline-light">Thêm khách hàng</button></a>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Tên</th>
+                        <th>Tên đăng nhập</th>
+                        <th>Trạng thái</th>
+                        <th>Email</th>
+                        <th>Số điện thoại</th>
+                        <th>Ngày tạo</th>
+                        <th>Thao tác</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    <% for( user of users ) {%>
+                    <tr>
+                        <%- listUser(user) %>
+                        <td>
+                            <a href="#"><i class="fas fa-address-card text-info"></i></i></a>
+                            <a href="/user/<%= user.id %>"><i class="fas fa-tools text-warning"></i></a>
+                            <i class="fas fa-trash-alt text-danger"></i>
+                        </td>
+                    </tr>
+                    <% } %>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="card-footer small text-muted">Đã cập nhật dữ liệu vào lúc 11:59 PM</div>
+</div>
