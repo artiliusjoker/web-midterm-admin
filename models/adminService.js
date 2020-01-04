@@ -18,13 +18,12 @@ service.createAdmin = async (body) => {
     let message = '';
     let flag = false;
     // Check password strength and validate existed account
-    if(body.password.length < 6){
+    if (body.password.length < 6) {
         result = false;
         message = 'Độ dài mật khẩu phải lớn hơn 6';
         flag = true;
     }
-    else if (await service.findByUname(body.username))
-    {
+    else if (await service.findByUname(body.username)) {
         result = false;
         message = 'Tài khoản đã tồn tại, bạn có quên mật khẩu không ?';
         flag = true;
@@ -60,5 +59,50 @@ service.validatePass = async (password, passHash) => {
     const result = await bcrypt.compare(password, passHash);
     return result;
 };
+
+service.updateAdmin = async (username, body) => {
+    let status = true,
+        message = 'Cập nhật thành công',
+        type = 'success';
+
+    const updateInfo = {
+        fullname: body.fullname,
+        address: body.address,
+        phone: body.phone,
+        email: body.email,
+        dob: body.dob
+    }
+
+    const admin = await Admin.findOneAndUpdate({username : username}, updateInfo);
+
+    if (body.password.length != 0 && body.password.length < 6) {
+        status = false;
+        message = 'Độ dài mật khẩu mới phải lớn hơn 6, thông tin khác vẫn được cập nhật !';
+        type = 'error'
+    }
+    else if (body.password.length != 0) {
+        const salt = await bcrypt.genSalt(10);
+        const hashedPass = await bcrypt.hash(body.password, salt);
+        admin.password = hashedPass;
+        message = 'Cập nhật thông tin và mật khẩu thành công';
+    }
+    if (admin.username != body.username) {
+        if (await service.findByUname(body.username)) {
+            message = 'Tên đăng nhập đã tồn tại, xin chọn tên khác, các thông tin mới vẫn được lưu lại !';
+            status = false;
+            type = 'error';
+        }
+        else {
+            admin.username = body.username;
+            await admin.save();
+        }
+    }
+
+    return {
+        status,
+        message,
+        type
+    }
+}
 
 module.exports = service;

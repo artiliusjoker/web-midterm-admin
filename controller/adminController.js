@@ -1,4 +1,5 @@
 const validate = require('../config/validate');
+const adminService = require('../models/adminService');
 var adminController = {}
 
 adminController.checkLoggedIn = function (req, res, next) {
@@ -14,8 +15,11 @@ adminController.getProfile = (req, res, next) => {
     res.render('pages/admin/profile', { title: 'Profile', name: `${req.user.fullname}` });
 }
 
-adminController.postProfile = (req, res, next) => {
-    res.render('pages/admin/profile', { title: 'Profile', name: `${req.user.fullname}` });
+adminController.postProfile = async (req, res, next) => {
+    const check = await adminService.updateAdmin(req.user.username, req.body);
+    req.flash(check.type, check.message);
+    res.redirect('/admin/profile');
+    //res.render('pages/admin/profile', { title: 'Profile', name: `${req.user.fullname}` });
 }
 
 adminController.charts = function (req, res, next) {
