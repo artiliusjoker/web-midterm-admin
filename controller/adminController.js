@@ -10,6 +10,14 @@ adminController.dashboard = function (req, res, next) {
     res.render('index', { title: 'Dashboard', name: 'Overview' });
 }
 
+adminController.getProfile = (req, res, next) => {
+    res.render('pages/admin/profile', { title: 'Profile', name: `${req.user.fullname}` });
+}
+
+adminController.postProfile = (req, res, next) => {
+    res.render('pages/admin/profile', { title: 'Profile', name: `${req.user.fullname}` });
+}
+
 adminController.charts = function (req, res, next) {
     res.render('pages/charts', { title: 'Charts Statistics', name: 'Charts' });
 }

@@ -9,6 +9,10 @@ router.get('/', controller.dashboard);
 
 router.get('/dashboard', controller.dashboard);
 
+router.get('/profile', controller.getProfile);
+
+router.post('/profile', controller.postProfile);
+
 router.get('/charts', controller.charts);
 
 router.get('/tables', controller.tables);
