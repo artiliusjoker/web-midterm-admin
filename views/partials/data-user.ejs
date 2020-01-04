@@ -1,8 +1,14 @@
+<link rel="stylesheet" href="/css/css_pages/table.css">
 <!-- DataTables Example -->
-<div class="card mb-3">
-    <div class="card-header">
-        <i class="fas fa-table"></i>
-        Bảng thống kê khách hàng</div>
+<div class="card mb-3" id="quan-table">
+    <div class="card-header border-0 py-2 rounded-top">
+        <div class="d-flex align-items-center py-1">
+            <h3 class="m-0 h5 font-weight-normal text-white w-50">Thống kê khách hàng</h3>
+            <div class="w-50 text-right">
+                <button class="btn btn-sm btn-outline-light">Thêm khách hàng</button>
+            </div>
+        </div>
+    </div>
     <div class="card-body">
         <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -11,12 +17,15 @@
                         <th>Tên</th>
                         <th>Tên đăng nhập</th>
                         <th>Trạng thái</th>
+                        <th>Email</th>
+                        <th>Số điện thoại</th>
+                        <th>Ngày tạo</th>
                         <th>Thao tác</th>
                     </tr>
                 </thead>
 
                 <tbody>
-                    
+
                     <% for( user of users ) {%>
                     <tr>
                         <%- listUser(user) %>
@@ -27,7 +36,7 @@
                         </td>
                     </tr>
                     <% } %>
-                    
+
                 </tbody>
             </table>
         </div>

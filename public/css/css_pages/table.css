@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css?family=Fira+Sans&display=swap');
+
+#quan-table {
+    font-family: 'Fira Sans', sans-serif;
+}
+
+.card-header, .card thead, .card tfoot {
+    background-color: #628dcd;
+}
+
+.card thead tr th, .card tfoot tr th {
+    border-color: #5b85c3;
+}
+
+.card tbody tr > td:first-child {
+    border-left: 1px solid #e0e0e0 !important;
+}
+
+.card tbody tr > td:last-child {
+    border-right: 1px solid #e0e0e0 !important;
+}
+
+#table-user {
+    margin-top: -.05rem !important;
+}

@@ -16,11 +16,11 @@ exports.queryAllUsers = async (req, res) => {
     const userQuery = await User.find({}, '-order');
 
     const users = userQuery.map(user => ({
-        fullname: user.name,
-        username: user.username,
-        status: user.status,
-        email: user.email,
-        phoneNum: user.phone,
+        fullname: user.name ? user.name : '',
+        username: user.username ? user.username : '',
+        status: user.status ? user.status : 'inactive',
+        email: user.email ? user.email : '',
+        phoneNum: user.phone ? user.phone : '',
         moneySpent: '200,000',
         createAt: new Date(user.createdAt),
         id: user._id
