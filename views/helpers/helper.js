@@ -1,5 +1,5 @@
 module.exports = {
-    
+
     listUsers: user => {
         let result = '';
         const statusDisplay = {
@@ -47,25 +47,32 @@ module.exports = {
         let result = '';
         const statusDisplay = {
             'active': '<span class="badge badge-success">Đang hoạt động</span>',
-            'inactive': '<span class="badge badge-warning">Ngừng hoạt động</span>',
-            'banned': '<span class="badge badge-danger">Bị khoá</span>',
+            'blocked': '<span class="badge badge-warning">Bị khoá</span>',
             'deleted': '<span class="badge badge-dark">Đã xoá</span>'
         }
-        const displayProperties = ['fullname', 'username', 'status', 'email', 'phoneNum', 'dayCreated'];
-        const arrayUser = Object.keys(admin);
+        const roleDisplay = {
+            normal: '<span class="badge badge-primary">Quản trị viên</span>',
+            monitor: '<span class="badge badge-light">Giám sát viên</span>',
+            editor: '<span class="badge badge-info">Quản lý hàng</span>',
+            super: '<span class="badge badge-dark">Quản trị hệ thống</span>'
+        }
+
+        const arrayKeys = Object.keys(admin);
 
         let key;
-        for (let i = 0; i < arrayUser.length; i++) {
-            key = arrayUser[i];
-            if (displayProperties.includes(key)) {
-                if (admin[key].length > 0) {
-                    if (statusDisplay.hasOwnProperty(admin[key])) {
-                        result += `<td>${statusDisplay[admin[key]]}</td>`;
-                    }
-                    else result += `<td>${admin[key]}</td>`;
-                } else result += '<td>Chưa có</td>';
-            }
+        for (let i = 0; i < arrayKeys.length; i++) {
+            key = arrayKeys[i];
+            if(key === 'id') break;
+            if (admin[key].length > 0) {
+                if (statusDisplay.hasOwnProperty(admin[key])) {
+                    result += `<td>${statusDisplay[admin[key]]}</td>`;
+                }
+                else if(roleDisplay.hasOwnProperty(admin[key])){
+                    result += `<td>${roleDisplay[admin[key]]}</td>`;
+                }
+                else result += `<td>${admin[key]}</td>`;
+            } else result += '<td>Chưa có</td>';
         }
         return result;
-    },
+    }
 }

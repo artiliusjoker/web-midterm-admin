@@ -25,7 +25,7 @@ adminController.postProfile = async (req, res, next) => {
 
 adminController.listAdmin = async function (req, res, next) {
     const admins = await adminService.queryAll();
-    res.render('pages/admin/list', { title: 'List admin', name: 'Admin List', data : admins, listAdmin : ejsHelper.listAdmin });
+    res.render('pages/admin/list', { title: 'List admin', name: 'Admin List', admins : admins, listAdmin : ejsHelper.listAdmin });
 }
 
 adminController.getDetails = async (req, res, next) => {

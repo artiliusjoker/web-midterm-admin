@@ -109,8 +109,8 @@ service.queryAll = async () => {
     const adminQuery = await Admin.find({}, '-address -avatar -birthday');
 
     const admins = adminQuery.map(admin => ({
-        username: admin.username ? admin.username : 'null',
-        fullname: admin.name ? admin.name : 'null',
+        username: admin.username,
+        fullname: admin.fullname,
         status: admin.status,
         role: admin.role,
         id: admin._id
