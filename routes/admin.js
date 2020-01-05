@@ -13,9 +13,11 @@ router.get('/profile', controller.getProfile);
 
 router.post('/profile', controller.postProfile);
 
-router.get('/charts', controller.charts);
+router.get('/list', controller.listAdmin);
 
-router.get('/tables', controller.tables);
+router.get('/detail/:id', controller.getDetails);
+
+router.get('/charts', controller.charts);
 
 router.get('/update', controller.update);
 

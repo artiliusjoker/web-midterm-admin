@@ -1,4 +1,5 @@
 module.exports = {
+    
     listUsers: user => {
         let result = '';
         const statusDisplay = {
@@ -40,6 +41,31 @@ module.exports = {
             else result += `<option ${options[element]}</option>`;
         }
         return result;
-    }
+    },
 
+    listAdmin: admin => {
+        let result = '';
+        const statusDisplay = {
+            'active': '<span class="badge badge-success">Đang hoạt động</span>',
+            'inactive': '<span class="badge badge-warning">Ngừng hoạt động</span>',
+            'banned': '<span class="badge badge-danger">Bị khoá</span>',
+            'deleted': '<span class="badge badge-dark">Đã xoá</span>'
+        }
+        const displayProperties = ['fullname', 'username', 'status', 'email', 'phoneNum', 'dayCreated'];
+        const arrayUser = Object.keys(admin);
+
+        let key;
+        for (let i = 0; i < arrayUser.length; i++) {
+            key = arrayUser[i];
+            if (displayProperties.includes(key)) {
+                if (admin[key].length > 0) {
+                    if (statusDisplay.hasOwnProperty(admin[key])) {
+                        result += `<td>${statusDisplay[admin[key]]}</td>`;
+                    }
+                    else result += `<td>${admin[key]}</td>`;
+                } else result += '<td>Chưa có</td>';
+            }
+        }
+        return result;
+    },
 }

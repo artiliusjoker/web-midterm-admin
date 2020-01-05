@@ -1,5 +1,6 @@
 const validate = require('../config/validate');
 const adminService = require('../models/adminService');
+const ejsHelper = require('../views/helpers/helper');
 var adminController = {}
 
 adminController.checkLoggedIn = function (req, res, next) {
@@ -20,6 +21,20 @@ adminController.postProfile = async (req, res, next) => {
     req.flash(check.type, check.message);
     res.redirect('/admin/profile');
     //res.render('pages/admin/profile', { title: 'Profile', name: `${req.user.fullname}` });
+}
+
+adminController.listAdmin = async function (req, res, next) {
+    const admins = await adminService.queryAll();
+    res.render('pages/admin/list', { title: 'List admin', name: 'Admin List', data : admins, listAdmin : ejsHelper.listAdmin });
+}
+
+adminController.getDetails = async (req, res, next) => {
+    const admin = await adminService.querryDetail(req, res);
+    if(!admin)
+    {
+        res.render('pages/admin/profile', { title: 'Admin profile', name: 'Profile', detail: 'null' });
+    }
+    else res.render('pages/user/profile', { title: 'Admin profile', name: 'Profile', detail : admin });
 }
 
 adminController.charts = function (req, res, next) {

@@ -73,7 +73,7 @@ service.updateAdmin = async (username, body) => {
         dob: body.dob
     }
 
-    const admin = await Admin.findOneAndUpdate({username : username}, updateInfo);
+    const admin = await Admin.findOneAndUpdate({ username: username }, updateInfo);
 
     if (body.password.length != 0 && body.password.length < 6) {
         status = false;
@@ -103,6 +103,35 @@ service.updateAdmin = async (username, body) => {
         message,
         type
     }
+}
+
+service.queryAll = async () => {
+    const adminQuery = await Admin.find({}, '-address -avatar -birthday');
+
+    const admins = adminQuery.map(admin => ({
+        username: admin.username ? admin.username : 'null',
+        fullname: admin.name ? admin.name : 'null',
+        status: admin.status,
+        role: admin.role,
+        id: admin._id
+    }))
+    return admins;
+}
+
+service.queryDetail = async () => {
+    const adminDetail = await Admin.findById(req.params.id);
+    const result = {
+        fullname: adminDetail.fullname,
+        username: adminDetail.username,
+        email: adminDetail.email,
+        phone: adminDetail.phone,
+        address: adminDetail.address,
+        dob: dateToString,
+        avatar: 'null',
+        status: adminDetail.status,
+        role: adminDetail.role,
+    }
+    return result;
 }
 
 module.exports = service;
