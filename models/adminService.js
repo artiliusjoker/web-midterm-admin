@@ -60,7 +60,7 @@ service.validatePass = async (password, passHash) => {
     return result;
 };
 
-service.updateAdmin = async (username, body) => {
+service.updateAdmin = async (adminId, body) => {
     let status = true,
         message = 'Cập nhật thành công',
         type = 'success';
@@ -73,7 +73,7 @@ service.updateAdmin = async (username, body) => {
         dob: body.dob
     }
 
-    const admin = await Admin.findOneAndUpdate({ username: username }, updateInfo);
+    const admin = await Admin.findByIdAndUpdate(adminId, updateInfo);
 
     if (body.password.length != 0 && body.password.length < 6) {
         status = false;
@@ -118,8 +118,8 @@ service.queryAll = async () => {
     return admins;
 }
 
-service.queryDetail = async () => {
-    const adminDetail = await Admin.findById(req.params.id);
+service.queryDetail = async (adminId) => {
+    const adminDetail = await Admin.findById(adminId);
     const result = {
         fullname: adminDetail.fullname,
         username: adminDetail.username,

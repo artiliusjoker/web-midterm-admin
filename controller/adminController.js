@@ -1,10 +1,9 @@
-const validate = require('../config/validate');
 const adminService = require('../models/adminService');
 const ejsHelper = require('../views/helpers/helper');
 var adminController = {}
 
 adminController.checkLoggedIn = function (req, res, next) {
-   if(validate.isLoggedIn(req)) return next();
+   if(req.user) return next();
     else res.redirect('/');
 };
 
@@ -17,10 +16,9 @@ adminController.getProfile = (req, res, next) => {
 }
 
 adminController.postProfile = async (req, res, next) => {
-    const check = await adminService.updateAdmin(req.user.username, req.body);
+    const check = await adminService.updateAdmin(req.user[_id], req.body);
     req.flash(check.type, check.message);
     res.redirect('/admin/profile');
-    //res.render('pages/admin/profile', { title: 'Profile', name: `${req.user.fullname}` });
 }
 
 adminController.listAdmin = async function (req, res, next) {
@@ -28,13 +26,27 @@ adminController.listAdmin = async function (req, res, next) {
     res.render('pages/admin/list', { title: 'List admin', name: 'Admin List', admins : admins, listAdmin : ejsHelper.listAdmin });
 }
 
-adminController.getDetails = async (req, res, next) => {
-    const admin = await adminService.querryDetail(req, res);
+adminController.getAdminDetail = async (req, res, next) => {
+    const admin = await adminService.querryDetail(req.params.id);
     if(!admin)
     {
-        res.render('pages/admin/profile', { title: 'Admin profile', name: 'Profile', detail: 'null' });
+        res.render('pages/admin/add', { title: '404', name: 'Không tìm thấy', detail: 'null' });
     }
-    else res.render('pages/user/profile', { title: 'Admin profile', name: 'Profile', detail : admin });
+    else res.render('pages/user/add', { title: `${admin.fullname}`, name: `${admin.username}`, detail : admin });
+}
+
+adminController.postAdminDetail = async (req, res, next) => {
+    const check = await adminService.updateAdmin(req.params.id, req.body);
+    req.flash(check.type, check.message);
+    res.redirect(`/admin/detail/${req.params.id}`);
+}
+
+adminController.getAddAdmin = async (req, res, next) => {
+
+}
+
+adminController.postAddAdmin = async (req, res, next) => {
+    
 }
 
 adminController.charts = function (req, res, next) {

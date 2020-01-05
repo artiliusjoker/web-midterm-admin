@@ -1,7 +1,7 @@
 const validate = {};
 
 validate.isLoggedIn = function(req){
-    if(req.isAuthenticated()){
+    if(req.user){
         return true;
     }
     return false;

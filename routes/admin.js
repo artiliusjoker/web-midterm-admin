@@ -15,7 +15,13 @@ router.post('/profile', controller.postProfile);
 
 router.get('/list', controller.listAdmin);
 
-router.get('/detail/:id', controller.getDetails);
+router.get('/detail/:id', controller.getAdminDetail);
+
+router.post('/detail/:id', controller.postAdminDetail);
+
+router.get('/add-admin', controller.getAddAdmin);
+
+router.post('/add-admin', controller.postAddAdmin);
 
 router.get('/charts', controller.charts);
 
