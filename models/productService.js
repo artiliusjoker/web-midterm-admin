@@ -1,6 +1,7 @@
 const { Product, Gender, Brand, Category, Group, ColorOption, SizeOption } = require('./productModel');
-const { config, uploader } = require('../config/cloudinary');
+const cloudinary = require('../config/cloudinary');
 const Datauri = require('datauri');
+const path = require('path');
 
 exports.getDataOfProduct = async () => {
     const result = {};
@@ -24,34 +25,49 @@ exports.getDataOfProduct = async () => {
 }
 
 exports.saveNewProduct = async (body, files) => {
-    const dUri = new Datauri();
     const models = {
         gender: Gender,
         brand: Brand,
         category: Category,
         group: Group,
+        color: ColorOption,
+        size: SizeOption
     }
-    const { gender, brand, category, group } = body;
-    const newProductMetaData = { gender, brand, category, group };
-    console.log(newProductMetaData, body);
+    const { gender, brand, category, group, color, size } = body;
+    const newProductMetaData = { gender, brand, category, group, color, size };
 
     const newProduct = new Product({
         name: body.name,
         quantity: body.quantity,
         description: body.description,
-        price: body.price,
+        price: body.price
     });
+
     await Promise.all([
         ...Object.keys(newProductMetaData).map(key => new Promise(async (resolve, reject) => {
             try {
                 const ref = await models[key].findOne({ key: newProductMetaData[key] });
-                newProduct[key] = ref._id;
+                if (key === 'color' || key === 'size') {
+                    newProduct['option'][key].push(ref._id);
+                }
+                else newProduct[key] = ref._id;
             } catch (error) {
                 reject('Không tạo được sản phẩm');
             }
             resolve('Thành công');
         }))
     ])
+
+    files.forEach(file => {
+        const dUri = new Datauri();
+        dUri.format(path.extname(file.originalname).toString(), file.buffer);
+        cloudinary.uploader.upload(dUri.content, { public_id: `product/${newProduct._id}` })
+        .then(result => {
+            newProduct['assert'][img].push(result.url);
+            console.log(result.url);
+        })
+    })
+
     await newProduct.save();
     return {
         type: 'success',
