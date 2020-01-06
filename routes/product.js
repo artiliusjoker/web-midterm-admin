@@ -7,4 +7,8 @@ router.get('*', checkLoggedIn);
 
 router.get('/', controller.getProductList);
 
+router.get('/add', controller.getProductAdd);
+
+router.post('/add', controller.postProductAdd);
+
 module.exports = router;
