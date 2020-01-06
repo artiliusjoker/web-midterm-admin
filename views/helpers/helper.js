@@ -62,17 +62,43 @@ module.exports = {
         let key;
         for (let i = 0; i < arrayKeys.length; i++) {
             key = arrayKeys[i];
-            if(key === 'id') break;
+            if (key === 'id') break;
             if (admin[key].length > 0) {
                 if (statusDisplay.hasOwnProperty(admin[key])) {
                     result += `<td>${statusDisplay[admin[key]]}</td>`;
                 }
-                else if(roleDisplay.hasOwnProperty(admin[key])){
+                else if (roleDisplay.hasOwnProperty(admin[key])) {
                     result += `<td>${roleDisplay[admin[key]]}</td>`;
                 }
                 else result += `<td>${admin[key]}</td>`;
             } else result += '<td>Chưa có</td>';
         }
         return result;
+    },
+
+    createDropdown: wrapData => {
+        const returnHTML = wrapData.map(field => {
+            const { query, title, list } = field;
+            let selectOfData = list.map(entry => {
+                if (entry.key === undefined) return '';
+                return `<option value="${entry.key}">${entry.name}</option>`;
+            }).join('\n');
+            return `
+                    <div class="form-group-inner">
+                        <div class="row">
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 text-right">
+                                <label class="login2 pull-right pull-right-pro">${title}</label>
+                            </div>
+                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                <div class="form-select-list">
+                                    <select class="form-control custom-select-value" name="${query}">
+                                        ${selectOfData}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>`
+        }).join('\n');
+        return returnHTML;
     }
 }

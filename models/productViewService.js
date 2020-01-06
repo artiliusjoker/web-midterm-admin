@@ -10,6 +10,7 @@ module.exports.wrapData = async (data) => {
 
     return Object.keys(title).map(key => {
         return {
+            query : key,
             title: title[key],
             list: data[key],
         }

@@ -11,9 +11,8 @@ productController.getProductList = (req, res, next) => {
 productController.getProductAdd = async (req, res, next) => {
     const productsMetaData = await productService.getDataOfProduct();
     const wrappedMetaData = await productViewService.wrapData(productsMetaData);
-    console.log(wrappedMetaData);
     const viewData = {
-        helper : 'null',
+        helper : ejsHelper.createDropdown,
         metadata : wrappedMetaData
     }
     res.render('pages/product/add', { title: 'Add product', name: 'Add Product', viewData : viewData });
