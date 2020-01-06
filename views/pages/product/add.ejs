@@ -11,14 +11,14 @@
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <div class="all-form-element-inner">
-                                <form action="#">
+                                <form method="POST" enctype="multipart/form-data" action="#">
                                     <div class="form-group-inner">
                                         <div class="row">
                                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 text-right">
                                                 <label class="login2 pull-right pull-right-pro">Tên sản phẩm</label>
                                             </div>
                                             <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
-                                                <input type="text" class="form-control" placeholder="Tên sản phẩm" />
+                                                <input name="name" type="text" class="form-control" placeholder="Tên sản phẩm" />
                                             </div>
                                         </div>
                                     </div>
@@ -29,7 +29,7 @@
                                                 <label class="login2 pull-right pull-right-pro">Mô tả sản phẩm</label>
                                             </div>
                                             <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
-                                                <input type="text" class="form-control"
+                                                <input name="description" type="text" class="form-control"
                                                     placeholder="Viết mô tả ngắn cho sản phẩm" />
                                             </div>
                                         </div>
@@ -41,7 +41,7 @@
                                                 <label class="login2 pull-right pull-right-pro">Giá tiền</label>
                                             </div>
                                             <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
-                                                <input type="text" class="form-control" placeholder="Nhập giá tiền" />
+                                                <input name="price" type="text" class="form-control" placeholder="Nhập giá tiền" />
                                             </div>
                                         </div>
                                     </div>
@@ -52,7 +52,7 @@
                                                 <label class="login2 pull-right pull-right-pro">Số lượng hàng</label>
                                             </div>
                                             <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
-                                                <input type="text" class="form-control" placeholder="Nhập số lượng" />
+                                                <input name="quantity" type="text" class="form-control" placeholder="Nhập số lượng" />
                                             </div>
                                         </div>
                                     </div>
@@ -63,7 +63,7 @@
                                         <div class="row">
                                             <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12 text-right">
                                                 <label class="login2 pull-right pull-right-pro">Tải hình sản
-                                                    phẩm</label>
+                                                    phẩm (nhiều nhất 3 hình)</label>
                                             </div>
                                             <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
                                                 <div class="file-upload-inner ts-forms">
@@ -73,8 +73,8 @@
                                                         </label>
                                                         <div class="file-button">
                                                             Browse
-                                                            <input type="file"
-                                                                onchange="document.getElementById('prepend-big-btn').value = this.value;">
+                                                            <input required name="files" type="file"
+                                                                onchange="document.getElementById('prepend-big-btn').value = this.value;" multiple>
                                                         </div>
                                                         <input type="text" id="prepend-big-btn"
                                                             placeholder="no file selected">
@@ -83,39 +83,16 @@
                                             </div>
                                         </div>
                                     </div>
-
-                                    <div class="form-group-inner">
-                                        <div class="row">
-                                            <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12 text-right">
-                                                <label class="login2 pull-right pull-right-pro">Tải hình thêm (tuỳ
-                                                    chọn)</label>
-                                            </div>
-                                            <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
-                                                <div class="file-upload-inner ts-forms">
-                                                    <div class="input prepend-big-btn">
-                                                        <label class="icon-right" for="prepend-big-btn">
-                                                            <i class="fa fa-download"></i>
-                                                        </label>
-                                                        <div class="file-button">
-                                                            Browse
-                                                            <input type="file"
-                                                                onchange="document.getElementById('prepend-big-btn').value = this.value;">
-                                                        </div>
-                                                        <input type="text" id="prepend-big-btn"
-                                                            placeholder="no file selected">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
+                                    <div class="text-center">
+                                        <% include ../../partials/flash %>
+                                    </div>                               
                                     <div class="form-group-inner text-right">
                                         <div class="login-btn-inner">
                                             <div class="row">
                                                 <div class="col-lg-3"></div>
                                                 <div class="col-lg-9">
                                                     <div class="login-horizental cancel-wp pull-left form-bc-ele">
-                                                        <button class="btn btn-sm btn-danger" type="submit">Tạo lại</button>
+                                                        <button class="btn btn-sm btn-danger" type="reset">Tạo lại</button>
                                                         <button class="btn btn-sm btn-primary login-submit-cs"
                                                             type="submit">Thêm sản phẩm</button>
                                                     </div>
