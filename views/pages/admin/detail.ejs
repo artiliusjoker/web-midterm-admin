@@ -1,0 +1,192 @@
+<% if (detail != 'null') { %>
+    <div class="container bootstrap snippet">
+        <div class="row">
+            <div class="col-sm-10">
+                <h2>Người dùng : <%= detail.username %></h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-3">
+                <!--left col-->
+    
+    
+                <div class="text-center">
+                    <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="avatar img-circle img-thumbnail"
+                        alt="avatar">
+                    <h6>Hình đại diện</h6>
+                    <input type="file" class="text-center center-block file-upload">
+                </div>
+                </hr><br>
+    
+            </div>
+            <!--/col-3-->
+            <div class="col-sm-9">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a data-toggle="tab" href="#home">Thông tin</a></li>
+                </ul>
+    
+    
+                <div class="tab-content mt-3">
+                    <div class="tab-pane active" id="home">
+    
+                        <form class="form" action="#" method="POST" id="registrationForm">
+                            
+                            <div class="form-group row">
+                                <div class="col-md-3">
+                                    <label for="username">
+                                        <h4>Tên đăng nhập</h4>
+                                    </label>
+                                </div>
+                                <div class="col-md-9">
+                                    <input type="text" class="form-control" name="username" id="user_name"
+                                        title="Tên đăng nhập" value="<%= detail.username %>">
+                                </div>
+                            </div>
+    
+                            <div class="form-group row">
+    
+                                <div class="col-md-3">
+                                    <label for="fullname">
+                                        <h4>Họ tên</h4>
+                                    </label>
+                                </div>
+                                <div class="col-md-9">
+                                    <input type="text" class="form-control" name="fullname" id="full_name"
+                                        title="Tên khách hàng" value="<%= detail.fullname %>">
+                                </div>
+                            </div>
+    
+                            <div class="form-group row">
+                                <div class="col-md-3">
+                                    <label for="dob"><h4>Sửa ngày sinh</h4></label>
+                                </div>
+                                <div class="col-md-9">
+                                    <input name="dob" type="date" class="form-control" id="dob" value="">
+                                </div>
+                            </div>
+                            
+                            <div class="form-group row">
+    
+                                <div class="col-md-3">
+                                    <label for="phone">
+                                        <h4>Ngày sinh</h4>
+                                    </label>
+                                </div>
+                                <div class="col-md-9">
+                                    <input type="text" class="form-control" disabled id="phone" title="Ngày sinh"
+                                        value="<%= detail.dob %>">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+    
+                                <div class="col-md-3">
+                                    <label for="phone">
+                                        <h4>Điện thoại</h4>
+                                    </label>
+                                </div>
+                                <div class="col-md-9">
+                                    <input type="text" class="form-control" name="phone" id="phone" title="Số điện thoại"
+                                        value="<%= detail.phone %>">
+                                </div>
+                            </div>
+    
+                            <div class="form-group row">
+                                <div class="col-md-3">
+                                    <label for="email">
+                                        <h4>Địa chỉ email</h4>
+                                    </label>
+                                </div>
+                                <div class="col-md-9">
+                                    <input value="<%= detail.email %>" type="email" class="form-control" name="email" id="email" title="Địa chỉ email">
+                                </div>
+                            </div>
+    
+                            <div class="form-group row">
+                                <div class="col-md-3">
+                                    <label for="email">
+                                        <h4>Địa chỉ</h4>
+                                    </label>
+                                </div>
+                                <div class="col-md-9">
+                                    <input name="address" value="<%= detail.address %>" type="text" class="form-control" id="location" title="Địa chỉ khách">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+    
+                                <div class="col-md-3">
+                                    <label for="password">
+                                        <h4>Mật khẩu mới</h4>
+                                    </label>
+                                </div>
+                                <div class="col-md-9">
+                                    <input type="password" class="form-control" name="password" id="password"
+                                        title="Mật khẩu">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+    
+                                <div class="col-md-3">
+                                    <label for="password_confirm">
+                                        <h4>Xác nhận lại</h4>
+                                    </label>
+                                </div>
+                                <div class="col-md-9">
+                                    <input type="password" class="form-control" name="password_confirm"
+                                        id="password_confirm" title="Xác nhận mật khẩu">
+                                </div>
+                            </div>
+    
+                            <div class="form-group row mb-0">
+                                <label for="status" class="col-md-3">
+                                    <h4>Sửa trạng thái</h4>
+                                </label>
+                                <div class="col-md-9">
+                                    <select name="status" id="select-status" class="custom-select form-control">
+                                        <%- helperStatus(detail.status) %>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group row mb-0">
+                                <label for="status" class="col-md-3">
+                                    <h4>Sửa vai trò</h4>
+                                </label>
+                                <div class="col-md-9">
+                                    <select name="role" id="select-status" class="custom-select form-control">
+                                        <option class="text-info" value="monitor">Giám sát</option>
+                                        <option class="text-success" value="normal">Quản lý người dùng</option>
+                                        <option class="text-primary" value="editor">Quản lý hàng</option>
+                                        <option class="text-danger" value="super">Quản trị viên</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <% include ../../partials/flash %>
+                            <div class="form-group">
+                                <div class="col-xs-12 text-center">
+                                    <br>
+                                    <button class="btn btn-lg btn-success" type="submit"><i
+                                            class="glyphicon glyphicon-ok-sign"></i> Lưu</button>
+                                    <button class="btn btn-lg btn-info" type="reset"><i
+                                            class="glyphicon glyphicon-repeat"></i>
+                                        Làm mới</button>
+                                </div>
+                            </div>
+                        </form>
+    
+                    </div>
+            
+                    <!--/tab-pane-->
+                </div>
+                <!--/tab-pane-->
+            </div>
+            <!--/tab-content-->
+    
+        </div>
+        <!--/col-9-->
+    </div>
+    <!--/row-->
+    <% } else{ %>  
+        <% include ../404 %>
+    <% } %>

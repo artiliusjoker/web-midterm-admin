@@ -8,6 +8,7 @@ const adminSchema = new Schema({
 	fullname: String,
 	birthday: Date,
 	avatar: String,
+	dob: Date,
 	address: {
 		type: String,
 		default: 'Ho Chi Minh University of Science'

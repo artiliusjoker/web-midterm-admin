@@ -1,5 +1,6 @@
 const bcrypt = require('bcryptjs');
 const Admin = require('./admin');
+const Util = require('../util');
 
 var service = {};
 
@@ -73,6 +74,9 @@ service.updateAdmin = async (adminId, body) => {
         dob: body.dob
     }
 
+    if(body.status != undefined) updateInfo.status = body.status;
+    if(body.role != undefined) updateInfo.role = body.role;
+
     const admin = await Admin.findByIdAndUpdate(adminId, updateInfo);
 
     if (body.password.length != 0 && body.password.length < 6) {
@@ -126,7 +130,7 @@ service.queryDetail = async (adminId) => {
         email: adminDetail.email,
         phone: adminDetail.phone,
         address: adminDetail.address,
-        dob: dateToString,
+        dob: adminDetail.dob ? Util.getDateFormat(adminDetail.dob) : 'null',
         avatar: 'null',
         status: adminDetail.status,
         role: adminDetail.role,

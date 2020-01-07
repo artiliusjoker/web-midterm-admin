@@ -16,7 +16,7 @@ adminController.getProfile = (req, res, next) => {
 }
 
 adminController.postProfile = async (req, res, next) => {
-    const check = await adminService.updateAdmin(req.user[_id], req.body);
+    const check = await adminService.updateAdmin(req.user['_id'], req.body);
     req.flash(check.type, check.message);
     res.redirect('/admin/profile');
 }
@@ -27,12 +27,12 @@ adminController.listAdmin = async function (req, res, next) {
 }
 
 adminController.getAdminDetail = async (req, res, next) => {
-    const admin = await adminService.querryDetail(req.params.id);
+    const admin = await adminService.queryDetail(req.params.id);
     if(!admin)
     {
-        res.render('pages/admin/add', { title: '404', name: 'Không tìm thấy', detail: 'null' });
+        res.render('pages/admin/detail', { title: '404', name: 'Không tìm thấy', detail: 'null' });
     }
-    else res.render('pages/user/add', { title: `${admin.fullname}`, name: `${admin.username}`, detail : admin });
+    else res.render('pages/admin/detail', { title: `${admin.fullname}`, name: `${admin.username}`, detail : admin, helperStatus: ejsHelper.selectedOption });
 }
 
 adminController.postAdminDetail = async (req, res, next) => {
@@ -42,7 +42,7 @@ adminController.postAdminDetail = async (req, res, next) => {
 }
 
 adminController.getAddAdmin = async (req, res, next) => {
-
+    res.render('pages/admin/add', { title: 'Add', name: 'Thêm quản trị viên' });
 }
 
 adminController.postAddAdmin = async (req, res, next) => {
