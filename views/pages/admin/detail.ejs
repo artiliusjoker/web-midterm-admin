@@ -143,7 +143,9 @@
                                 </label>
                                 <div class="col-md-9">
                                     <select name="status" id="select-status" class="custom-select form-control">
-                                        <%- helperStatus(detail.status) %>
+                                        <option class="text-success" value="active">Hoạt động (active)</option>
+                                        <option class="text-danger" value="blocked">Khoá tài khoản (blocked)</option>
+                                        <option class="text-danger" value="blocked">Xóa tài khoản (Deleted)</option>
                                     </select>
                                 </div>
                             </div>

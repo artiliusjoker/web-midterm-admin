@@ -19,9 +19,9 @@ router.get('/detail/:id', controller.getAdminDetail);
 
 router.post('/detail/:id', controller.postAdminDetail);
 
-router.get('/add-admin', controller.getAddAdmin);
+router.get('/add', controller.getAddAdmin);
 
-router.post('/add-admin', controller.postAddAdmin);
+router.post('/add', controller.postAddAdmin);
 
 router.get('/charts', controller.charts);
 

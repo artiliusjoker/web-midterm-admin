@@ -46,7 +46,9 @@ adminController.getAddAdmin = async (req, res, next) => {
 }
 
 adminController.postAddAdmin = async (req, res, next) => {
-    
+    const check = await adminService.createAdmin(req.body);
+    req.flash(check.result ? 'success' : 'error', check.message);
+    res.redirect('/admin/add');
 }
 
 adminController.charts = function (req, res, next) {

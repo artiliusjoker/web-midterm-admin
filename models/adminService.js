@@ -26,7 +26,7 @@ service.createAdmin = async (body) => {
     }
     else if (await service.findByUname(body.username)) {
         result = false;
-        message = 'Tài khoản đã tồn tại, bạn có quên mật khẩu không ?';
+        message = 'Tài khoản đã tồn tại, xin hãy thử lại !';
         flag = true;
     }
     if (flag) return ({
@@ -43,13 +43,19 @@ service.createAdmin = async (body) => {
         phone: body.phone,
     });
 
+    if(body.status != undefined) admin.status = body.status;
+    if(body.role != undefined) admin.role = body.role;
+    if(body.dob != undefined) admin.dob = body.dob;
+    if(body.avatar != undefined) admin.avatar = body.avatar;
+    if(body.address != undefined) admin.address = body.address;
+    
     // Generate hash string to store in database
     const salt = await bcrypt.genSalt(10);
     const hashedPass = await bcrypt.hash(admin.password, salt);
     admin.password = hashedPass;
     // Save admin
     await admin.save();
-    message = "Đăng kí thành công";
+    message = "Tạo mới thành công";
     return ({
         result,
         message
