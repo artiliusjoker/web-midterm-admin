@@ -34,9 +34,6 @@ service.listAllOrder = async () => {
             resolve('Tạo thành công');
         }))
     ])
-
-    console.log(ordersInfo);
-
     return ordersInfo;
 }
 
