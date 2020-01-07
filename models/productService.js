@@ -25,6 +25,18 @@ exports.getDataOfProduct = async () => {
 }
 
 exports.saveNewProduct = async (body, files) => {
+
+    const soluong = parseInt(body.quantity);
+    const giathanh = parseInt(body.price);
+
+    if(isNaN(soluong) || isNaN(giathanh))
+    {
+        return {
+            type: 'error',
+            message: 'Không nhập đúng kiểu dữ liệu của sản phẩm'
+        }
+    }
+
     const models = {
         gender: Gender,
         brand: Brand,
@@ -38,9 +50,9 @@ exports.saveNewProduct = async (body, files) => {
 
     const newProduct = new Product({
         name: body.name,
-        quantity: body.quantity,
+        quantity: soluong,
         description: body.description,
-        price: body.price
+        price: giathanh
     });
 
     await Promise.all([
@@ -58,15 +70,22 @@ exports.saveNewProduct = async (body, files) => {
         }))
     ])
 
-    files.forEach(file => {
+    for(let i = 0; i < files.length; i++)
+    {
         const dUri = new Datauri();
-        dUri.format(path.extname(file.originalname).toString(), file.buffer);
-        cloudinary.uploader.upload(dUri.content, { public_id: `product/${newProduct._id}` })
+        dUri.format(path.extname(files[i].originalname).toString(), files[i].buffer);
+        await cloudinary.uploader.upload(dUri.content, { public_id: `product/${newProduct._id}_${i + 1}` })
         .then(result => {
-            newProduct['assert'][img].push(result.url);
-            console.log(result.url);
+            newProduct.assert.img.push(result.url);
         })
-    })
+        .catch(err => {
+            console.log(err);
+            return {
+                type: 'error',
+                message: 'Đã có lỗi xảy ra khi tạo sản phẩm'
+            }
+        })
+    }
 
     await newProduct.save();
     return {
