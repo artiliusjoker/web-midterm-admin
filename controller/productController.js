@@ -9,7 +9,7 @@ productController.getProductList = async (req, res, next) => {
     const totalItems = await productService.productCount(query);
     const queryOption = {
         page: productViewService.getPageOption({
-            itemPerPage: 12,
+            itemPerPage: 5,
             currentPage: req.query['page'] ? parseInt(req.query['page']) : 1,
             totalItems: totalItems,
             url: req.baseUrl + req.path,
@@ -23,6 +23,7 @@ productController.getProductList = async (req, res, next) => {
     const viewModel = {
         products: productViewService.getProductListViewModel(products),
         pageOptions: queryOption.page,
+        pageHelper: ejsHelper.createPagination
     }
     res.render('pages/product/list', { title: 'Products', name: 'Products List', viewModel });
 }
