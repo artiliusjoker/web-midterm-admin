@@ -3,8 +3,6 @@ const router = express.Router();
 const controller = require('../controller/userController');
 const check = require('../controller/adminController').checkLoggedIn;
 
-router.delete('/:id', controller.deleteUser);
-
 router.get('*', check);
 
 router.get('/', controller.listUser);
@@ -18,5 +16,7 @@ router.post('/add', controller.postAddUser);
 router.get('/:id', controller.getDetails);
 
 router.post('/:id', controller.updateDetails);
+
+router.delete('/:id', controller.deleteUser);
 
 module.exports = router;

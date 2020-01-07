@@ -14,17 +14,12 @@ const UserSchema = new mongoose.Schema({
         enum: ['active', 'banned', 'deleted', 'inactive'],
         default: 'inactive'
     },
-    order: [{
-        status: String,
-        date: Date,
-        items: [{
-            item_id: String,
-            quantity: Number,
-            price: Number
-        }],
-        total_price: Number
+    shippingAddress: [{
+        name: String,
+        address: String,
+        phone: String
     }],
-    active: Boolean,
+
 }, {
     timestamps: true
 });
