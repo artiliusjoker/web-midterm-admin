@@ -1,0 +1,48 @@
+<link rel="stylesheet" href="/css/css_pages/table.css">
+<!-- DataTables Example -->
+<div class="card mb-3" id="quan-table">
+    <div class="card-header border-0 py-2 rounded-top">
+        <div class="d-flex align-items-center py-1">
+            <h3 class="m-0 h5 font-weight-normal text-white w-50">Thống kê đơn hàng</h3>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Mã đơn hàng</th>
+                        <th>Người mua (Họ tên)</th>
+                        <th>Ngày đặt</th>
+                        <th>Thành tiền</th>
+                        <th>Trạng thái</th>
+                        <th>Thao tác</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    <% for( order of orders ) {%>
+                    <tr>
+                        <td> <%= order.id %> </td>
+                        <td> <%= order.owner %> </td>
+                        <td> <%= order.date %> </td>
+                        <td> <%= order.price %> </td>
+                        <td> <%- statusHelper(order.status) %> </td>
+                        <td>
+                            <a href="#"><i class="fas fa-address-card text-info"></i></i></a>
+                            <a href="/admin/<%= user.id %>/modify"><i class="fas fa-tools text-warning"></i></a>
+                            <i class="fas fa-trash-alt text-danger"></i>
+                        </td>
+                    </tr>
+                    <% } %>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="card-footer small text-muted">Đã cập nhật dữ liệu vào lúc 11:59 PM</div>
+</div>
+
+<!-- Table scripts for this page-->
+<script src="/js/demo/datatables-demo.js"></script>

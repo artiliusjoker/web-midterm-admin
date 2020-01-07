@@ -2,6 +2,16 @@ const qs = require('querystring');
 
 module.exports = {
 
+    createStatusLabel : (status) => {
+        // {{!-- primary - success - danger - info - warning --}}
+        const map = {};
+        ['Đang xác nhận', 'Đang giao', 'Đã giao', 'Đã hủy'].forEach((item, index) => {
+            map[item] = [...['info', 'warning', 'success', 'danger']][index];
+        });
+        // console.log(map);
+        return `<span class="badge badge-${map[status]}">${status}</span>`;
+    },
+
     listUsers: user => {
         let result = '';
         const statusDisplay = {
