@@ -38,3 +38,49 @@ module.exports.getPageOption = ({ itemPerPage, currentPage, totalItems, url, que
         queryParams
     }
 }
+
+module.exports.getSortOption = ({ query }) => {
+    const option = new function () {
+        this.queryString = 'sort',
+            this.list = [{
+                key: '0',
+                name: 'Sắp xếp theo giá tăng dần'
+            }, {
+                key: '1',
+                name: 'Sắp xếp theo giá giảm dần'
+            }, {
+                key: '2',
+                name: 'Sản phẩm phổ biến'
+            }, {
+                key: '3',
+                name: 'Sản phẩm bán chạy'
+            }, {
+                key: '4',
+                name: 'Sản phẩm mới'
+            }, {
+                key: '5',
+                name: 'Sản phẩm yêu thích'
+            }
+            ]
+        this.selected = query[this.queryString];
+    };
+    return option;
+}
+
+module.exports.getFilterOptions = async ({ query, data }) => {
+    const title = {
+        gender: 'Giới tính',
+        brand: 'Thương hiệu',
+        category: 'Danh mục',
+        group: 'Loại'
+    }
+    const result = {};
+    return Object.keys(title).map(key => {
+        return {
+            queryString: key,
+            title: title[key],
+            list: data[key],
+            selected: query[key],
+        }
+    });
+}

@@ -1,8 +1,14 @@
 <div class="row">
 
+    <div class="col-md-3">
+        <form method="GET" id="queryForm">
+            <%- viewModel.pageHelper.createSortOption(viewModel.sortOption) %>
+            <%- viewModel.pageHelper.createCheckBoxOptions(viewModel.filterOptions) %>
+        </form>
+    </div>
     <div class="col-lg-8 mx-auto my-4">
         <div class="row justify-content-end">
-            <%- viewModel.pageHelper(viewModel.pageOptions) %>
+            <%- viewModel.pageHelper.createPagination(viewModel.pageOptions) %>
         </div>
         <!-- List group-->
         <ul class="list-group shadow">
@@ -29,3 +35,4 @@
     </div>
 </div>
 <link href="/css/css_pages/products.css" rel="stylesheet">
+<script src="/js/formQuery.js"></script>

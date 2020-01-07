@@ -101,13 +101,14 @@ exports.productCount = async (query) => {
     return await Product.countDocuments(query);
 }
 
-exports.getProducts = async (query, page) => {
+exports.getProducts = async (query, { page, sort }) => {
     //query
-    return (page)
+    return (page && sort)
         ?
         await Product.find(query)
             .skip((page.currentPage - 1) * page.itemPerPage)
             .limit(page.itemPerPage)
+            .sort(sort)
         :
         await Product.find(query);
 }
@@ -151,6 +152,55 @@ exports.getQueryObject = async (query) => {
                     let temp = await models[key].findOne({ key: query[key] });
                     result[key] = (temp && temp._id) ? temp._id : null;
                 }
+                resolve();
+            })
+        )]);
+    return result;
+}
+
+exports.getSortQueryObject = (option) => {
+    const sort = {};
+    if (!option)
+        return sort;
+    const code = parseInt(option);
+
+    switch (code) {
+        // price increasing
+        case 0:
+            sort['price'] = 1;
+            break;
+        // price descending
+        case 1:
+            sort['price'] = -1;
+            break;
+        case 2:
+            sort['view'] = -1;
+            break;
+        case 3:
+            sort['sold'] = -1;
+            break;
+        case 4:
+            sort['createdAt'] = -1;
+            break;
+        case 5:
+            sort['rating'] = -1;
+            break;
+    }
+    return sort;
+}
+
+exports.getFilterOptionsData = async () => {
+    const models = {
+        gender: Gender,
+        brand: Brand,
+        category: Category,
+        group: Group
+    }
+    const result = {};
+    await Promise.all([
+        ...Object.keys(models).map(key =>
+            new Promise(async (resolve, reject) => {
+                result[key] = await models[key].find();
                 resolve();
             })
         )]);

@@ -7,7 +7,13 @@ var productController = {};
 productController.getProductList = async (req, res, next) => {
     const query = await productService.getQueryObject(req.query);
     const totalItems = await productService.productCount(query);
+    
+    const sortOption = productViewService.getSortOption({query: req.query});
+    const fitlerOptionsData = await productService.getFilterOptionsData();
+    const filterOptions = await productViewService.getFilterOptions({query: req.query, data: fitlerOptionsData});
+
     const queryOption = {
+        sort: productService.getSortQueryObject(sortOption.selected),
         page: productViewService.getPageOption({
             itemPerPage: 5,
             currentPage: req.query['page'] ? parseInt(req.query['page']) : 1,
@@ -18,12 +24,14 @@ productController.getProductList = async (req, res, next) => {
     }
 
     // get products
-    const products = await productService.getProducts(query, queryOption.page);
+    const products = await productService.getProducts(query, queryOption);
 
     const viewModel = {
         products: productViewService.getProductListViewModel(products),
         pageOptions: queryOption.page,
-        pageHelper: ejsHelper.createPagination
+        pageHelper: ejsHelper,
+        sortOption,
+        filterOptions
     }
     res.render('pages/product/list', { title: 'Products', name: 'Products List', viewModel });
 }
