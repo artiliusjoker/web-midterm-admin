@@ -9,4 +9,8 @@ router.get('/', controller.getListOrder);
 
 router.get('/list', controller.getListOrder);
 
+router.post('/:id', controller.postStatus);
+
+router.get('/:id', controller.getListOrder);
+
 module.exports = router;

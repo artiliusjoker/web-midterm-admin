@@ -37,4 +37,25 @@ service.listAllOrder = async () => {
     return ordersInfo;
 }
 
+service.changeStatus = async (orderId, body) => {
+    let status = true,
+        message = 'success';
+    const hash = {
+        orderDeleted : 'Đã hủy',
+        orderDeliver : 'Đang giao',
+        orderComplete : 'Đã giao'
+    }
+    try {
+        await Order.findByIdAndUpdate(orderId, {status : hash[body.status]});
+    } catch (error) {
+        console.log(error);
+        status = false;
+        message = 'fail'
+    }
+    return {
+        status,
+        message
+    }
+}
+
 module.exports = service;
