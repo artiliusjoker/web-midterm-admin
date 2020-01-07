@@ -8,6 +8,8 @@ router.get('*', checkLoggedIn);
 
 router.get('/', controller.getProductList);
 
+router.get('/list', controller.getProductList);
+
 router.get('/add', controller.getProductAdd);
 
 router.post('/add', multiUpload.array('files', 3) ,controller.postProductAdd);

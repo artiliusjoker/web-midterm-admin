@@ -56,8 +56,8 @@ exports.saveNewProduct = async (body, files) => {
     await Promise.all([
         ...Object.keys(newProductMetaData).map(key => new Promise(async (resolve, reject) => {
             try {
-                if (key === 'color' || key === 'size') {                  
-                    const myArray = new Array(newProductMetaData[key]);                  
+                if (key === 'color' || key === 'size') {
+                    const myArray = new Array(newProductMetaData[key]);
                     myArray.forEach(async optionData => {
                         const ref = await models[key].findOne({ key: optionData });
                         newProduct['option'][key].push(ref._id);
@@ -95,4 +95,64 @@ exports.saveNewProduct = async (body, files) => {
         type: 'success',
         message: 'Tạo sản phẩm thành công !'
     }
+}
+
+exports.productCount = async (query) => {
+    return await Product.countDocuments(query);
+}
+
+exports.getProducts = async (query, page) => {
+    //query
+    return (page)
+        ?
+        await Product.find(query)
+            .skip((page.currentPage - 1) * page.itemPerPage)
+            .limit(page.itemPerPage)
+        :
+        await Product.find(query);
+}
+
+exports.getQueryObject = async (query) => {
+    const result = {};
+    const models = {
+        gender: Gender,
+        brand: Brand,
+        category: Category,
+        group: Group
+    }
+
+    //get all ids
+    await Promise.all([
+        ...Object.keys(query).map(key =>
+            new Promise(async (resolve, reject) => {
+                // property not in {gender, brand, ...} => not insert to result
+                if (!models[key]) {
+                    resolve();
+                    return;
+                }
+                // property in array => query all values
+                if (Array.isArray(query[key])) {
+                    // query
+                    const temp = (await Promise.all([
+                        ...query[key].map((value) => new Promise(
+                            async (resolve, reject) => {
+                                resolve(await models[key].findOne({ key: value }));
+                            })
+                        )
+                    ])).reduce((found, res) => {
+                        // map res to id, trunc null element
+                        if (res && res._id)
+                            found.push(res._id);
+                        return found;
+                    }, []);
+                    result[key] = { "$in": temp };
+                }
+                else {
+                    let temp = await models[key].findOne({ key: query[key] });
+                    result[key] = (temp && temp._id) ? temp._id : null;
+                }
+                resolve();
+            })
+        )]);
+    return result;
 }

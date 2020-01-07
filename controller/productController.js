@@ -4,8 +4,27 @@ const productViewService = require('../models/productViewService');
 
 var productController = {};
 
-productController.getProductList = (req, res, next) => {
-    res.render('pages/product/list', { title: 'Products', name: 'Products List' });
+productController.getProductList = async (req, res, next) => {
+    const query = await productService.getQueryObject(req.query);
+    const totalItems = await productService.productCount(query);
+    const queryOption = {
+        page: productViewService.getPageOption({
+            itemPerPage: 12,
+            currentPage: req.query['page'] ? parseInt(req.query['page']) : 1,
+            totalItems: totalItems,
+            url: req.baseUrl + req.path,
+            queryParams: req.query
+        })
+    }
+
+    // get products
+    const products = await productService.getProducts(query, queryOption.page);
+
+    const viewModel = {
+        products: productViewService.getProductListViewModel(products),
+        pageOptions: queryOption.page,
+    }
+    res.render('pages/product/list', { title: 'Products', name: 'Products List', viewModel });
 }
 
 productController.getProductAdd = async (req, res, next) => {
