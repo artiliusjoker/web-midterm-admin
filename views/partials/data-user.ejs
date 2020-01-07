@@ -27,12 +27,12 @@
                 <tbody>
 
                     <% for( user of users ) {%>
-                    <tr>
+                    <tr id="<%- user.id %>">
                         <%- listUser(user) %>
                         <td>
                             <a href="#"><i class="fas fa-address-card text-info"></i></i></a>
                             <a href="/user/<%= user.id %>"><i class="fas fa-tools text-warning"></i></a>
-                            <i class="fas fa-trash-alt text-danger"></i>
+                            <a href="#" onclick="deleteUser('<%= user.id %>')"><i class="fas fa-trash-alt text-danger"></i></a>
                         </td>
                     </tr>
                     <% } %>
@@ -42,3 +42,4 @@
         </div>
     </div>
 </div>
+<script src="/js/ajax/userDelete.js"></script>

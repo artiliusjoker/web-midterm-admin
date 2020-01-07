@@ -33,8 +33,9 @@ userController.postAddUser = async (req, res, next) => {
     res.redirect('/user/add');
 }
 
-userController.test = (req, res, next) => {
-    res.render('pages/user/profile', { title: 'User profile', name: 'Profile' });
+userController.deleteUser = async (req, res, next) => {
+    const result = await userService.deleteUser(req.params.id);
+    res.send(result);
 }
 
 module.exports = userController;

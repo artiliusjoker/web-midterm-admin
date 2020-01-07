@@ -133,3 +133,28 @@ exports.addUser = async (userInfo) => {
         message
     })
 }
+
+exports.deleteUser = async userId => {
+    let message = 'Xoá người dùng thành công',
+        status;
+    try {
+        const userDeleted = await User.findById(userId);
+        if(userDeleted === 'deleted') 
+        {
+            message = 'Người dùng đã được xoá !';
+            status = false;
+        }
+        else {
+            userDeleted.status = 'deleted';
+            status = true;
+            await userDeleted.save();
+        }
+    } catch (error) {
+        status = false;
+        message = 'Đã có lỗi phát sinh, không thể xoá !';
+    }
+    return {
+        status,
+        message
+    }
+}
