@@ -18,7 +18,8 @@
                                                 <label class="login2 pull-right pull-right-pro">Tên sản phẩm</label>
                                             </div>
                                             <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
-                                                <input name="name" type="text" class="form-control" placeholder="Tên sản phẩm" />
+                                                <input name="name" type="text" class="form-control"
+                                                    placeholder="Tên sản phẩm" />
                                             </div>
                                         </div>
                                     </div>
@@ -41,7 +42,8 @@
                                                 <label class="login2 pull-right pull-right-pro">Giá tiền</label>
                                             </div>
                                             <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
-                                                <input name="price" type="text" class="form-control" placeholder="Nhập giá tiền" />
+                                                <input name="price" type="text" class="form-control"
+                                                    placeholder="Nhập giá tiền" />
                                             </div>
                                         </div>
                                     </div>
@@ -52,13 +54,14 @@
                                                 <label class="login2 pull-right pull-right-pro">Số lượng hàng</label>
                                             </div>
                                             <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
-                                                <input name="quantity" type="text" class="form-control" placeholder="Nhập số lượng" />
+                                                <input name="quantity" type="text" class="form-control"
+                                                    placeholder="Nhập số lượng" />
                                             </div>
                                         </div>
                                     </div>
 
                                     <%- viewData.helper(viewData.metadata) %>
-                                
+                               
                                     <div class="form-group-inner">
                                         <div class="row">
                                             <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12 text-right">
@@ -74,7 +77,8 @@
                                                         <div class="file-button">
                                                             Browse
                                                             <input required name="files" type="file"
-                                                                onchange="document.getElementById('prepend-big-btn').value = this.value;" multiple>
+                                                                onchange="document.getElementById('prepend-big-btn').value = this.value;"
+                                                                multiple>
                                                         </div>
                                                         <input type="text" id="prepend-big-btn"
                                                             placeholder="no file selected">
@@ -85,14 +89,15 @@
                                     </div>
                                     <div class="text-center">
                                         <% include ../../partials/flash %>
-                                    </div>                               
+                                    </div>
                                     <div class="form-group-inner text-right">
                                         <div class="login-btn-inner">
                                             <div class="row">
                                                 <div class="col-lg-3"></div>
                                                 <div class="col-lg-9">
                                                     <div class="login-horizental cancel-wp pull-left form-bc-ele">
-                                                        <button class="btn btn-sm btn-danger" type="reset">Tạo lại</button>
+                                                        <button class="btn btn-sm btn-danger" type="reset">Tạo
+                                                            lại</button>
                                                         <button class="btn btn-sm btn-primary login-submit-cs"
                                                             type="submit">Thêm sản phẩm</button>
                                                     </div>

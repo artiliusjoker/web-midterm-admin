@@ -25,12 +25,10 @@ exports.getDataOfProduct = async () => {
 }
 
 exports.saveNewProduct = async (body, files) => {
-
     const soluong = parseInt(body.quantity);
     const giathanh = parseInt(body.price);
 
-    if(isNaN(soluong) || isNaN(giathanh))
-    {
+    if (isNaN(soluong) || isNaN(giathanh)) {
         return {
             type: 'error',
             message: 'Không nhập đúng kiểu dữ liệu của sản phẩm'
@@ -58,11 +56,17 @@ exports.saveNewProduct = async (body, files) => {
     await Promise.all([
         ...Object.keys(newProductMetaData).map(key => new Promise(async (resolve, reject) => {
             try {
-                const ref = await models[key].findOne({ key: newProductMetaData[key] });
-                if (key === 'color' || key === 'size') {
-                    newProduct['option'][key].push(ref._id);
+                if (key === 'color' || key === 'size') {                  
+                    const myArray = new Array(newProductMetaData[key]);                  
+                    myArray.forEach(async optionData => {
+                        const ref = await models[key].findOne({ key: optionData });
+                        newProduct['option'][key].push(ref._id);
+                    })
                 }
-                else newProduct[key] = ref._id;
+                else {
+                    const ref = await models[key].findOne({ key: newProductMetaData[key] });
+                    newProduct[key] = ref._id;
+                }
             } catch (error) {
                 reject('Không tạo được sản phẩm');
             }
@@ -70,21 +74,20 @@ exports.saveNewProduct = async (body, files) => {
         }))
     ])
 
-    for(let i = 0; i < files.length; i++)
-    {
+    for (let i = 0; i < files.length; i++) {
         const dUri = new Datauri();
         dUri.format(path.extname(files[i].originalname).toString(), files[i].buffer);
         await cloudinary.uploader.upload(dUri.content, { public_id: `product/${newProduct._id}_${i + 1}` })
-        .then(result => {
-            newProduct.assert.img.push(result.url);
-        })
-        .catch(err => {
-            console.log(err);
-            return {
-                type: 'error',
-                message: 'Đã có lỗi xảy ra khi tạo sản phẩm'
-            }
-        })
+            .then(result => {
+                newProduct.assert.img.push(result.url);
+            })
+            .catch(err => {
+                console.log(err);
+                return {
+                    type: 'error',
+                    message: 'Đã có lỗi xảy ra khi tạo sản phẩm'
+                }
+            })
     }
 
     await newProduct.save();

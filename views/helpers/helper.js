@@ -79,10 +79,28 @@ module.exports = {
     createDropdown: wrapData => {
         const returnHTML = wrapData.map(field => {
             const { query, title, list } = field;
-            let selectOfData = list.map(entry => {
+            let selectOfData = list.map( entry => {
                 if (entry.key === undefined) return '';
-                return `<option value="${entry.key}">${entry.name}</option>`;
+                if (query === 'color' || query === 'size')
+                    return `<label class="checkbox-inline i-checks pull-left">
+                                <input type="checkbox" value="${entry.key}" id="${query}" name="${query}"> ${entry.name}
+                            </label>`;
+                else return `<option value="${entry.key}">${entry.name}</option>`;
             }).join('\n');
+
+            let div;
+            if (query !== 'color' && query !== 'size')
+            {
+                div = `<div class="form-select-list">
+                            <select class="form-control custom-select-value" name="${query}">
+                                ${selectOfData}
+                            </select>
+                        </div>`;
+            }
+            else div = `<div class="inline-checkbox-cs">
+                            ${selectOfData}
+                        </div>`;
+
             return `
                     <div class="form-group-inner">
                         <div class="row">
@@ -90,11 +108,7 @@ module.exports = {
                                 <label class="login2 pull-right pull-right-pro">${title}</label>
                             </div>
                             <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
-                                <div class="form-select-list">
-                                    <select class="form-control custom-select-value" name="${query}">
-                                        ${selectOfData}
-                                    </select>
-                                </div>
+                                ${div}
                             </div>
                         </div>
                     </div>`
