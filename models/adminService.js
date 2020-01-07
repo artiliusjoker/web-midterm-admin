@@ -144,4 +144,29 @@ service.queryDetail = async (adminId) => {
     return result;
 }
 
+service.deleteAdmin = async (id) => {
+    let message = 'Xoá admin thành công',
+        status;
+    try {
+        const admin = await Admin.findById(id);
+        if(admin === 'deleted') 
+        {
+            message = 'Admin đã được xoá !';
+            status = false;
+        }
+        else {
+            admin.status = 'deleted';
+            status = true;
+            await admin.save();
+        }
+    } catch (error) {
+        status = false;
+        message = 'Đã có lỗi phát sinh, không thể xoá !';
+    }
+    return {
+        status,
+        message
+    }
+}
+
 module.exports = service;

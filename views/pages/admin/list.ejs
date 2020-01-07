@@ -25,12 +25,12 @@
                 <tbody>
 
                     <% for( admin of admins ) {%>
-                    <tr>
+                    <tr id="<%- admin.id %>">
                         <%- listAdmin(admin) %>
                         <td>
                             <a href="#"><i class="fas fa-address-card text-info"></i></i></a>
                             <a href="/admin/detail/<%= admin.id %>"><i class="fas fa-tools text-warning"></i></a>
-                            <i class="fas fa-trash-alt text-danger"></i>
+                            <a href="#" onclick="deleteAdmin('<%- admin.id %>')"><i class="fas fa-trash-alt text-danger"></i></a>                       
                         </td>
                     </tr>
                     <% } %>
@@ -44,3 +44,4 @@
 
 <!-- Table scripts for this page-->
 <script src="/js/demo/datatables-demo.js"></script>
+<script src="/js/ajax/adminDelete.js"></script>

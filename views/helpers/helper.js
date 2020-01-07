@@ -58,9 +58,9 @@ module.exports = {
     listAdmin: admin => {
         let result = '';
         const statusDisplay = {
-            'active': '<span class="badge badge-success">Đang hoạt động</span>',
-            'blocked': '<span class="badge badge-warning">Bị khoá</span>',
-            'deleted': '<span class="badge badge-dark">Đã xoá</span>'
+            'active': '<span class="status-display badge badge-success">Đang hoạt động</span>',
+            'blocked': '<span class="status-display badge badge-warning">Bị khoá</span>',
+            'deleted': '<span class="status-display badge badge-dark">Đã xoá</span>'
         }
         const roleDisplay = {
             normal: '<span class="badge badge-primary">Quản trị viên</span>',

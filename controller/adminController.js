@@ -51,6 +51,19 @@ adminController.postAddAdmin = async (req, res, next) => {
     res.redirect('/admin/add');
 }
 
+adminController.deleteAdmin = async (req, res, next) => {
+    let result;
+    if(req.user['_id'] == req.params.id)
+    {
+        result = {
+            status : false,
+            message : 'Bạn không thể xóa tài khoản chính mình'
+        }
+    }
+    else result = await adminService.deleteAdmin(req.params.id);
+    res.send(result);
+}
+
 adminController.charts = function (req, res, next) {
     res.render('pages/charts', { title: 'Charts Statistics', name: 'Charts' });
 }

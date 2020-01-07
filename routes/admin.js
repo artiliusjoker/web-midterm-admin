@@ -23,6 +23,8 @@ router.get('/add', controller.getAddAdmin);
 
 router.post('/add', controller.postAddAdmin);
 
+router.delete('/delete/:id', controller.deleteAdmin);
+
 router.get('/charts', controller.charts);
 
 router.get('/update', controller.update);
