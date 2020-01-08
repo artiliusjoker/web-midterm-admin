@@ -1,0 +1,178 @@
+<% if (detail != 'null') { %>
+<div class="row justify-content-center">
+    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+        <div class="sparkline12-list">
+            <div class="sparkline12-hd text-center">
+                <div class="main-sparkline12-hd">
+                    <h1><%= detail.name %></h1>
+                </div>
+            </div>
+            <div class="sparkline12-graph">
+                <div class="basic-login-form-ad">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="all-form-element-inner">
+                                <form method="POST" enctype="multipart/form-data" action="#">
+                                    <div class="form-group-inner">
+                                        <div class="row">
+                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 text-right">
+                                                <label class="login2 pull-right pull-right-pro">Tên sản phẩm</label>
+                                            </div>
+                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                <input value="<%= detail.name %>" name="name" type="text" class="form-control"
+                                                    disabled />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group-inner">
+                                        <div class="row">
+                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 text-right">
+                                                <label class="login2 pull-right pull-right-pro">Mô tả sản phẩm</label>
+                                            </div>
+                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                <input name="description" type="text" class="form-control"
+                                                    value="<%= detail.description %>" disabled />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group-inner">
+                                        <div class="row">
+                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 text-right">
+                                                <label class="login2 pull-right pull-right-pro">Giới tính</label>
+                                            </div>
+                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                <input disabled name="quantity" type="text" class="form-control"
+                                                    value="<%= detail.gender %>" />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group-inner">
+                                        <div class="row">
+                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 text-right">
+                                                <label class="login2 pull-right pull-right-pro">Danh mục</label>
+                                            </div>
+                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                <input disabled name="quantity" type="text" class="form-control"
+                                                    value="<%= detail.category %>" />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group-inner">
+                                        <div class="row">
+                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 text-right">
+                                                <label class="login2 pull-right pull-right-pro">Nhóm hàng</label>
+                                            </div>
+                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                <input disabled name="quantity" type="text" class="form-control"
+                                                    value="<%= detail.group %>" />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group-inner">
+                                        <div class="row">
+                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 text-right">
+                                                <label class="login2 pull-right pull-right-pro">Giá tiền</label>
+                                            </div>
+                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                <input name="price" type="text" class="form-control"
+                                                    value="<%= detail.price %>" disabled />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group-inner">
+                                        <div class="row">
+                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 text-right">
+                                                <label class="login2 pull-right pull-right-pro">Điểm đánh giá</label>
+                                            </div>
+                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                <input name="price" type="text" class="form-control"
+                                                    value="<%= detail.rating %>" disabled />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group-inner">
+                                        <div class="row">
+                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 text-right">
+                                                <label class="login2 pull-right pull-right-pro">Số lần được xem</label>
+                                            </div>
+                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                <input name="price" type="text" class="form-control"
+                                                    value="<%= detail.view %>" disabled />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group-inner">
+                                        <div class="row">
+                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 text-right">
+                                                <label class="login2 pull-right pull-right-pro">Đã bán</label>
+                                            </div>
+                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                <input name="price" type="text" class="form-control"
+                                                    value="<%= detail.sold %>" disabled />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group-inner">
+                                        <div class="row">
+                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 text-right">
+                                                <label class="login2 pull-right pull-right-pro">Số lượng hàng</label>
+                                            </div>
+                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                <input disabled name="quantity" type="text" class="form-control"
+                                                    value="<%= detail.quantity %>" />
+                                            </div>
+                                        </div>
+                                    </div>
+        
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+<link rel="stylesheet" href="/layout_products/owl.carousel.css">
+<link rel="stylesheet" href="/layout_products/owl.theme.css">
+<link rel="stylesheet" href="/layout_products/owl.transitions.css">
+<!-- animate CSS  -->
+<link rel="stylesheet" href="/layout_products/animate.css">
+
+<!-- normalize CSS -->
+<link rel="stylesheet" href="/layout_products/normalize.css">
+
+<!-- meanmenu icon CSS -->
+<link rel="stylesheet" href="/layout_products/meanmenu.min.css">
+
+<!-- main CSS -->
+<link rel="stylesheet" href="/layout_products/main.css">
+
+<!-- educate icon CSS -->
+<link rel="stylesheet" href="/layout_products/educate-custon-icon.css">
+
+<!-- morrisjs CSS -->
+<link rel="stylesheet" href="/layout_products/morrisjs/morris.css">
+
+<!-- forms CSS -->
+<link rel="stylesheet" href="/layout_products/form/all-type-forms.css">
+
+<!-- style CSS -->
+<link rel="stylesheet" href="/layout_products/form/form.css">
+
+<!-- responsive CSS -->
+<link rel="stylesheet" href="/layout_products/responsive.css">
+<% } else{ %>  
+    <% include ../404 %>
+<% } %>

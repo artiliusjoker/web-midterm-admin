@@ -226,3 +226,33 @@ exports.deleteProduct = async (id) => {
         message
     }
 }
+
+exports.getDetail = async (id) => {
+    const rejection = '-createdAt -updatedAt -option -review';
+    const models = {
+        gender: Gender,
+        brand: Brand,
+        category: Category,
+        group: Group
+    }
+    const product = await Product.findById(id, rejection);
+    const result = {};
+
+    await Promise.all([
+        ...Object.keys(models).map(key =>
+            new Promise(async (resolve, reject) => {
+                const temp = await models[key].findById(product[key]);
+                result[key] = temp['name'];
+                resolve();
+            }))
+    ]);
+    result.name = product.name;
+    result.description = product.description;
+    result.quantity = product.quantity;
+    result.price = product.price;
+    result.assert = product.assert;
+    result.view = product.view;
+    result.sold = product.sold;
+    result.rating = product.rating;
+    return result;
+}

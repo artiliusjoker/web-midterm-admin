@@ -15,7 +15,7 @@ module.exports = (passport)  => {
 				if(user.status === 'deleted')
 					done(null, false, { errors: "Tài khoản đã bị xóa !" });
 			} catch (error) {
-				if(err) return done(error);
+				if(error) return done(error);
 			}
 
 			if(!await adminService.validatePass(password, user.password)){

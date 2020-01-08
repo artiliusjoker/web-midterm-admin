@@ -58,7 +58,8 @@ productController.deleteProduct = async (req, res, next) => {
 }
 
 productController.getDetailProduct = async (req, res, next) => {
-    res.render('pages/product/detail');
+    const product = await productService.getDetail(req.params.id);
+    res.render('pages/product/detail', { title: 'Sản phẩm', name: `${product.name}`, detail : product });
 }
 
 productController.postDetailProduct = async (req, res, next) => {
