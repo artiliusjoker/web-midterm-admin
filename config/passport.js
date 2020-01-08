@@ -9,7 +9,11 @@ module.exports = (passport)  => {
 			try {
 				user = await adminService.findByUname(username);
 				if(!user)
-					done(null, false, { errors: "Incorrect username." });
+					done(null, false, { errors: "Sai thông tin đăng nhập !" });
+				if(user.status === 'blocked')
+					done(null, false, { errors: "Tài khoản đã bị khóa !" });
+				if(user.status === 'deleted')
+					done(null, false, { errors: "Tài khoản đã bị xóa !" });
 			} catch (error) {
 				if(err) return done(error);
 			}

@@ -23,7 +23,7 @@ indexController.postLogin = (req, res, next) => {
             return next(err);
         }
         if (!user || err) {
-			req.flash("error", "Sai thông tin, xin hãy thử lại !");
+			req.flash("error", message.errors);
             return res.redirect('/');
         }
         req.logIn(user, function (err) {
