@@ -52,4 +52,17 @@ productController.postProductAdd = async (req, res, next) => {
     res.redirect('/product/add');
 }
 
+productController.deleteProduct = async (req, res, next) => {
+    const result = await productService.deleteProduct(req.params.id);
+    res.send(result);
+}
+
+productController.getDetailProduct = async (req, res, next) => {
+    res.render('pages/product/detail');
+}
+
+productController.postDetailProduct = async (req, res, next) => {
+    res.redirect(`/product/${req.params.id}`)
+}
+
 module.exports = productController;

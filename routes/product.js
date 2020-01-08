@@ -14,4 +14,10 @@ router.get('/add', controller.getProductAdd);
 
 router.post('/add', multiUpload.array('files', 3) ,controller.postProductAdd);
 
+router.get('/:id', controller.getDetailProduct);
+
+router.post(':/id', controller.postDetailProduct);
+
+router.delete('/:id', controller.deleteProduct);
+
 module.exports = router;

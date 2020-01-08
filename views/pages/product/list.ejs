@@ -14,15 +14,25 @@
         <ul class="list-group shadow">
 
             <% for( product of viewModel.products ) {%>
-            <li class="list-group-item">
+            <li class="list-group-item" id="<%- product.id %>">
                 <!-- Custom content-->
                 <div class="media align-items-lg-center flex-column flex-lg-row p-3">
                     <div class="media-body order-2 order-lg-1">
                         <h5 class="mt-0 font-weight-bold mb-2"><%= product.name %></h5>
                         <p class="font-italic text-muted mb-0 small"><%= product.description %></p>
                         <div class="d-flex align-items-center justify-content-between mt-1">
+                            <h6 class="font-weight-bold my-2">Mã sản phẩm : <%= product.id %></h6>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-between mt-1">
+                            <h6 class="font-weight-bold my-2">Mô tả sản phẩm : <%= product.description %></h6>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-between mt-1">
                             <h6 class="font-weight-bold my-2">Giá : <%= product.price %> VND</h6>
                         </div>
+                        <a href="#"><i class="fas fa-address-card text-info"></i></i></a>
+                        <a href="/product/<%= product.id %>"><i class="fas fa-tools text-warning"></i></a>
+                        <a href="#" onclick="deleteProduct('<%- product.id %>')"><i
+                                class="fas fa-trash-alt text-danger"></i></a>
                     </div><img src="<%- product.imgpath %>" alt="Generic placeholder image" width="200"
                         class="ml-lg-5 order-1 order-lg-2">
                 </div>
@@ -36,3 +46,4 @@
 </div>
 <link href="/css/css_pages/products.css" rel="stylesheet">
 <script src="/js/formQuery.js"></script>
+<script src="/js/ajax/productDelete.js"></script>

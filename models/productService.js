@@ -206,3 +206,23 @@ exports.getFilterOptionsData = async () => {
         )]);
     return result;
 }
+
+exports.deleteProduct = async (id) => {
+    let message = 'Xoá sản phẩm thành công',
+        status = true;
+    try {
+        const result = await Product.deleteOne({'_id' : id}, {single : true})
+        if(result.deletedCount !== 1)
+        {
+            message = 'Đã có lỗi trong việc xóa sản phẩm',
+            status = false;
+        }
+    } catch (error) {
+        status = false;
+        message = 'Đã có lỗi phát sinh, không thể xoá !';
+    }
+    return {
+        status,
+        message
+    }
+}
